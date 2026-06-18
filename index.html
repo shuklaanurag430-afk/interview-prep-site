@@ -1,118 +1,254 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Strategy Interview Prep - Indian Broking</title>
+<title>Strategy Interview Prep — Indian Broking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f8f9fb;--surface:#fff;--accent:#1a56db;--accent2:#0d3a9e;--text:#1a1a2e;--text2:#555;--border:#e2e8f0;--green:#059669;--amber:#d97706;--red:#dc2626;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.08)}
+:root{
+  --bg:#f8f9fb;--surface:#fff;--accent:#1a56db;--accent2:#0d3a9e;--text:#1a1a2e;--text2:#555;
+  --border:#e2e8f0;--green:#059669;--amber:#d97706;--red:#dc2626;--radius:12px;
+  --shadow:0 1px 3px rgba(0,0,0,.08);--sidebar-w:260px
+}
 html{scroll-behavior:smooth}
 body{font-family:Inter,system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-top:64px}
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);height:64px}
-.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 24px}
-.nav-brand{font-weight:700;font-size:1.1rem;color:var(--accent)}
-.nav-links{display:flex;gap:8px}
-.nav-links a{padding:8px 14px;border-radius:8px;text-decoration:none;color:var(--text2);font-size:.88rem;font-weight:500;transition:.2s}
-.nav-links a:hover{background:var(--bg);color:var(--accent)}
+
+/* ── TOP NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--surface);border-bottom:1px solid var(--border);height:64px}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 24px}
+.nav-brand{font-weight:700;font-size:1.05rem;color:var(--accent)}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap}
+.nav-links a{padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--text2);font-size:.82rem;font-weight:500;transition:.2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:var(--bg);color:var(--accent)}
 .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--text)}
-.container{max-width:1280px;margin:0 auto;padding:0 24px}
-.hero{background:linear-gradient(135deg,#1a56db 0,#0d3a9e 100%);color:#fff;padding:60px 24px 48px;text-align:center;margin-bottom:40px}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.btn-expand-all{font-size:.78rem;padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-weight:500;transition:.2s;font-family:inherit}
+.btn-expand-all:hover{background:var(--bg);color:var(--accent)}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:64px;left:0;bottom:0;width:var(--sidebar-w);background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:16px 0;transition:transform .3s}
+.sidebar-inner{padding:0 16px}
+.sidebar-title{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--text2);letter-spacing:.05em;padding:8px 12px;margin-bottom:4px}
+.sidebar a{display:block;padding:7px 12px;border-radius:6px;text-decoration:none;color:var(--text2);font-size:.84rem;font-weight:500;transition:.15s;margin-bottom:2px}
+.sidebar a:hover,.sidebar a.active{background:#f0f4ff;color:var(--accent);font-weight:600}
+.sidebar .sub{font-size:.78rem;padding-left:24px;color:var(--text2);opacity:.85}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:99}
+
+/* ── MAIN ── */
+.main{margin-left:var(--sidebar-w);min-height:calc(100vh - 64px)}
+.container{max-width:1100px;margin:0 auto;padding:0 28px}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#1a56db 0,#0d3a9e 100%);color:#fff;padding:56px 28px 44px;text-align:center;margin-bottom:36px}
 .hero h1{font-size:2.4rem;font-weight:800;margin-bottom:8px}
 .hero p{font-size:1.1rem;opacity:.9;max-width:700px;margin:0 auto}
-section{padding:32px 0}
-section h2{font-size:1.6rem;font-weight:700;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid var(--accent);display:inline-block}
-.section-desc{color:var(--text2);margin-bottom:24px;font-size:.95rem}
-.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin-bottom:24px;border:1px solid var(--border)}
-.card h3{font-size:1.15rem;font-weight:700;margin-bottom:12px;color:var(--accent)}
-.card h4{font-size:1rem;font-weight:600;margin-top:16px;margin-bottom:8px;color:var(--text)}
-.card p,.card li{color:var(--text2);font-size:.93rem;margin-bottom:8px}
+.hero .hero-meta{margin-top:12px;font-size:.88rem;opacity:.8}
+
+/* ── SECTIONS ── */
+section{padding:20px 0}
+.section-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;user-select:none;transition:.2s;margin-bottom:2px;gap:12px}
+.section-header:hover{box-shadow:0 2px 8px rgba(0,0,0,.06);border-color:#cbd5e1}
+.section-header h2{font-size:1.25rem;font-weight:700;color:var(--text);flex:1;min-width:0;border:none;padding:0;margin:0;display:inline}
+.section-header .section-num{font-size:.8rem;font-weight:700;color:var(--accent);background:#f0f4ff;padding:4px 10px;border-radius:6px;white-space:nowrap}
+.accordion-icon{font-size:1.3rem;color:var(--text2);transition:transform .35s;flex-shrink:0;width:24px;text-align:center;line-height:1;font-weight:600}
+.section-header.open .accordion-icon{transform:rotate(45deg)}
+.section-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.4,0,0.2,1),padding .5s;padding:0}
+.section-body.open{max-height:200000px;padding:0}
+.section-body-inner{padding:4px 0 24px}
+.section-desc{color:var(--text2);margin-bottom:20px;font-size:.93rem;padding:0 4px}
+
+/* ── CARDS ── */
+.card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:18px;border:1px solid var(--border);overflow:hidden}
+.card-header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;cursor:pointer;user-select:none;transition:.15s;gap:12px;background:var(--surface)}
+.card-header:hover{background:#fafbfc}
+.card-header h3{font-size:1.08rem;font-weight:700;color:var(--accent);flex:1;min-width:0;margin:0}
+.card-header h4{font-size:.95rem;font-weight:600;color:var(--text);flex:1;margin:0}
+.card-icon{font-size:1.1rem;color:var(--text2);transition:transform .3s;flex-shrink:0;width:20px;text-align:center;line-height:1}
+.card-header.open .card-icon{transform:rotate(45deg)}
+.card-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0.4,0,0.2,1)}
+.card-body.open{max-height:150000px}
+.card-body-inner{padding:0 24px 20px}
+.card p,.card li{color:var(--text2);font-size:.91rem;margin-bottom:8px}
 .card ul,.card ol{padding-left:20px}
 .card hr{margin:16px 0;border:none;border-top:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0 20px}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
-th{background:var(--bg);font-weight:600;font-size:.82rem;text-transform:uppercase;color:var(--text2)}
+
+/* ── TABLES ── */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0 20px}
+table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:600px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:var(--bg);font-weight:600;font-size:.8rem;text-transform:uppercase;color:var(--text2);white-space:nowrap}
 tr:hover td{background:#f8fafc}
-.answer{border-left:3px solid var(--accent);padding:16px 20px;margin:12px 0;background:#f0f4ff;border-radius:0 8px 8px 0}
+
+/* ── ANSWER BOX ── */
+.answer{border-left:3px solid var(--accent);padding:16px 20px;margin:12px 0;background:#f0f4ff;border-radius:0 8px 8px 0;font-size:.91rem}
 .answer strong{color:var(--accent)}
-.framework-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:16px 0}
-.framework-item{background:var(--bg);padding:16px 20px;border-radius:8px;border-left:3px solid var(--accent)}
-.framework-item strong{display:block;margin-bottom:4px;font-size:.95rem}
-.framework-item span{font-size:.85rem;color:var(--text2)}
-.insight-box{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1px solid #a7f3d0;border-radius:8px;padding:16px 20px;margin:12px 0}
+.answer u{text-decoration:none;font-weight:600;color:var(--text)}
+
+/* ── FRAMEWORK ── */
+.framework-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+.framework-item{background:var(--bg);padding:14px 18px;border-radius:8px;border-left:3px solid var(--accent)}
+.framework-item strong{display:block;margin-bottom:4px;font-size:.92rem}
+.framework-item span{font-size:.83rem;color:var(--text2)}
+
+/* ── INSIGHT ── */
+.insight-box{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1px solid #a7f3d0;border-radius:8px;padding:14px 18px;margin:12px 0;font-size:.89rem}
 .insight-box strong{color:var(--green)}
-.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
-.metric-card{text-align:center;padding:16px;background:var(--bg);border-radius:8px}
-.metric-card .val{font-size:1.5rem;font-weight:800;color:var(--accent)}
-.metric-card .lbl{font-size:.8rem;color:var(--text2);margin-top:4px}
-.tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:.75rem;font-weight:600;margin:2px}
+
+/* ── METRICS ── */
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.metric-card{text-align:center;padding:14px;background:var(--bg);border-radius:8px;border:1px solid var(--border)}
+.metric-card .val{font-size:1.4rem;font-weight:800;color:var(--accent)}
+.metric-card .lbl{font-size:.78rem;color:var(--text2);margin-top:4px}
+.metric-card .sub{font-size:.72rem;color:var(--text2);opacity:.7}
+
+/* ── TAGS ── */
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.73rem;font-weight:600;margin:2px}
 .tag-green{background:#d1fae5;color:#065f46}
 .tag-blue{background:#dbeafe;color:#1e40af}
 .tag-amber{background:#fef3c7;color:#92400e}
 .tag-red{background:#fee2e2;color:#991b1b}
-.btn-up{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:99;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.2s}
+
+/* ── TRENDS SECTION ── */
+.trends-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:12px 0}
+.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
+.trend-card h4{font-size:.98rem;font-weight:700;margin-bottom:8px;color:var(--accent)}
+.trend-card .trend-date{font-size:.75rem;color:var(--text2);margin-bottom:8px;font-weight:500}
+.trend-card p{font-size:.87rem;color:var(--text2);line-height:1.5}
+
+/* ── PROFILES TABLE ── */
+.profiles-table th:first-child{min-width:100px}
+.profiles-table td:first-child{font-weight:600;color:var(--accent);white-space:nowrap}
+
+/* ── BACK TO TOP ── */
+.btn-up{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:99;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.2s;opacity:0;pointer-events:none}
+.btn-up.visible{opacity:1;pointer-events:auto}
 .btn-up:hover{background:var(--accent2)}
-footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border-top:1px solid var(--border);margin-top:48px}
-@media(max-width:768px){
-  .nav-links{display:none;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--surface);padding:12px;border-bottom:1px solid var(--border)}
-  .nav.open .nav-links{display:flex}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:32px;color:var(--text2);font-size:.83rem;border-top:1px solid var(--border);margin-top:40px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .sidebar{transform:translateX(-100%);width:280px}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay.show{display:block}
+  .main{margin-left:0}
+  .nav-links{overflow-x:auto;flex-wrap:nowrap;gap:2px;-webkit-overflow-scrolling:touch;max-width:100%;scrollbar-width:none}
+  .nav-links::-webkit-scrollbar{display:none}
+  .nav-links a{font-size:.76rem;padding:5px 10px;flex-shrink:0}
   .nav-toggle{display:block}
-  .hero h1{font-size:1.6rem}
-  .hero{padding:40px 16px 32px}
+  .btn-expand-all{display:none}
+  .nav-brand{font-size:.92rem}
 }
-.toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:32px}
-.toc h3{margin-bottom:12px;font-size:1rem}
-.toc a{display:block;padding:6px 0;color:var(--accent);text-decoration:none;font-size:.9rem}
-.toc a:hover{text-decoration:underline}
+@media(max-width:768px){
+  .hero h1{font-size:1.5rem}
+  .hero{padding:36px 16px 28px}
+  .hero p{font-size:.95rem}
+  .container{padding:0 14px}
+  .section-header{padding:12px 14px}
+  .section-header h2{font-size:1.05rem}
+  .card-header{padding:12px 16px}
+  .card-body-inner{padding:0 16px 14px}
+  .trends-grid{grid-template-columns:1fr}
+  .framework-grid{grid-template-columns:1fr}
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  table{font-size:.8rem}
+  th,td{padding:8px}
+}
+@media(max-width:480px){
+  .metric-grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:1.25rem}
+  .nav{padding:0 6px}
+  .nav-inner{padding:0 10px}
+}
 </style>
 </head><body>
 
+<!-- ═══ TOP NAV ═══ -->
 <nav class="nav" id="nav"><div class="nav-inner">
-<div class="nav-brand">Interview Prep Strategy</div>
-<div class="nav-links">
-<a href="#competitors">Competitors</a><a href="#case-studies">Case Studies</a>
-<a href="#product-thinking">Product</a><a href="#behavioral">Behavioral</a><a href="#market">Market Q&amp;A</a>
+<button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+<div class="nav-brand">Strategy Interview Prep</div>
+<div class="nav-actions">
+<button class="btn-expand-all" id="btnExpandAll" title="Expand All Sections">Expand All</button>
+<button class="btn-expand-all" id="btnCollapseAll" title="Collapse All Sections" style="display:none">Collapse All</button>
 </div>
-<button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
 </div></nav>
+
+<!-- ═══ SIDEBAR OVERLAY (mobile) ═══ -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar"><div class="sidebar-inner">
+<div class="sidebar-title">Sections</div>
+<a href="#competitors" data-section="competitors">1. Competitor Analysis</a>
+<a href="#profiles" data-section="profiles">2. Company Profiles</a>
+<a href="#case-studies" data-section="case-studies">3. Case Studies (7)</a>
+<a href="#product-thinking" data-section="product-thinking">4. Product Thinking (5)</a>
+<a href="#behavioral" data-section="behavioral">5. Behavioral Q&A (8)</a>
+<a href="#market" data-section="market">6. Market Q&A (15)</a>
+<a href="#trends" data-section="trends">7. Industry Trends</a>
+<a href="#numbers" data-section="numbers">8. Key Numbers</a>
+</div></aside>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main" id="main">
+
+<!-- HERO -->
 <div class="hero">
 <h1>Strategy Interview Prep</h1>
-<p>Indian Stockbroking &amp; Financial Services &middot; New Customer Acquisition &middot; Product Features</p>
-<p style="margin-top:12px;font-size:.9rem;opacity:.8">Candidate: Anurag Shukla &middot; Senior Manager &middot; Referral &amp; Acquisition Strategy, Angel One</p>
-</div><div class="container">
-<div class="toc">
-<h3>Contents</h3>
-<a href="#competitors">1. Competitor Analysis &mdash; Full Comparison</a>
-<a href="#case-studies">2. Strategic Case Studies (with Sample Answers)</a>
-<a href="#product-thinking">3. Product &amp; Feature Thinking (with Sample Answers)</a>
-<a href="#behavioral">4. Behavioral &amp; Experience Questions (with Sample Answers)</a>
-<a href="#market">5. Market &amp; Industry Q&amp;A</a>
+<p>Indian Stockbroking &amp; Financial Services · New Customer Acquisition · Product Features</p>
+<p class="hero-meta">Candidate: Anurag Shukla · Senior Manager · Referral &amp; Acquisition Strategy, Angel One · June 2026</p>
 </div>
-<section id="competitors"><h2>Competitor Analysis &mdash; Full Comparison</h2>
-<p class="section-desc">Detailed comparison of 6 major Indian brokers across financials, pricing, products, MTF, and strategies. Sources: company filings, DRHP, pricing pages, NSE data.</p>
-<div class="card"><h3>Market Overview</h3>
-<table><thead><tr><th>Broker</th><th>Type</th><th>NSE Active Clients</th><th>Market Share</th><th>FY25 Revenue</th><th>FY25 PAT</th><th>PAT Margin</th></tr></thead>
+
+<div class="container">
+
+<!-- ═══════════════════════ 1. COMPETITOR ANALYSIS ═══════════════════════ -->
+<section id="competitors">
+<div class="section-header open" data-section="competitors">
+<span class="section-num">Sec 1</span>
+<h2>Competitor Analysis — Full Comparison</h2>
+<span class="accordion-icon">+</span>
+</div>
+<div class="section-body open"><div class="section-body-inner">
+<p class="section-desc">Detailed comparison of 6 major Indian brokers across financials, pricing, products, MTF, and strategies. Sources: company filings, DRHP, pricing pages, NSE data. <em>Last updated: June 2026.</em></p>
+
+<!-- Market Overview -->
+<div class="card" id="card-market-overview">
+<div class="card-header open" data-card="market-overview"><h3>Market Overview</h3><span class="card-icon">+</span></div>
+<div class="card-body open"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr><th>Broker</th><th>Type</th><th>NSE Active Clients</th><th>Market Share</th><th>FY25 Revenue</th><th>FY25 PAT</th><th>PAT Margin</th></tr></thead>
 <tbody>
 <tr><td><strong>Groww</strong></td><td>Digital-first (listed)</td><td>12.92M</td><td>26.3%</td><td>₹3,901 Cr</td><td>₹1,824 Cr</td><td><span class="tag tag-green">44.92%</span></td></tr>
-<tr><td><strong>Angel One</strong></td><td>Discount (listed)</td><td>7.58M</td><td>~15-16%</td><td>₹5,238 Cr</td><td>₹1,172 Cr</td><td><span class="tag tag-blue">22.34%</span></td></tr>
-<tr><td><strong>Zerodha</strong></td><td>Discount (private)</td><td>~6.5-7M</td><td>~14-15%</td><td>~₹6,500-7,000 Cr</td><td>N/A</td><td>N/A (private)</td></tr>
-<tr><td><strong>Upstox</strong></td><td>Discount</td><td>~4-4.5M</td><td>~9-10%</td><td>₹1,500+ Cr</td><td>N/A</td><td>N/A</td></tr>
+<tr><td><strong>Angel One</strong></td><td>Discount (listed)</td><td>7.58M</td><td>~15–16%</td><td>₹5,238 Cr</td><td>₹1,172 Cr</td><td><span class="tag tag-blue">22.34%</span></td></tr>
+<tr><td><strong>Zerodha</strong></td><td>Discount (private)</td><td>~6.5–7M</td><td>~14–15%</td><td>~₹6,500–7,000 Cr</td><td>N/A</td><td>N/A (private)</td></tr>
+<tr><td><strong>Upstox</strong></td><td>Discount</td><td>~4–4.5M</td><td>~9–10%</td><td>₹1,500+ Cr</td><td>N/A</td><td>N/A</td></tr>
 <tr><td><strong>Dhan</strong></td><td>Discount</td><td>~1M+</td><td>~2.2%</td><td>₹877 Cr</td><td>₹408 Cr</td><td><span class="tag tag-green">46.5%</span></td></tr>
 <tr><td><strong>Motilal Oswal</strong></td><td>Full-service (listed)</td><td>1.01M</td><td>~2.1%</td><td>₹8,339 Cr</td><td>₹2,508 Cr</td><td><span class="tag tag-amber">29.80%</span></td></tr>
-</tbody></table>
-<div class="insight-box"><strong>Key Insight:</strong> Groww has the largest client base and highest PAT margin (44.92%). Dhan has the highest profit margin among discount brokers (46.5%) despite being the youngest. Angel One leads in revenue among discount brokers but has lower margins than Groww or Dhan.</div>
-</div>
-<div class="card"><h3>NSE Active Client Growth &mdash; Market Share Dynamics</h3>
-<table><thead><tr><th>Period</th><th>Groww</th><th>Groww Share</th><th>Angel One</th><th>Industry Total</th></tr></thead>
+</tbody></table></div>
+<div class="insight-box"><strong>Key Insight:</strong> Groww has the largest client base and highest PAT margin (44.92%) among listed discount brokers. Dhan has the highest profit margin among all discount brokers (46.5%) despite being the youngest. Angel One leads in revenue among discount brokers but has lower margins than Groww or Dhan.</div>
+<p style="font-size:.82rem;color:var(--text2);margin-top:8px"><strong>Latest (Jan 2026):</strong> NSE active client shares — Groww 28.2%, Zerodha 15.4%, Angel One 14.8%. 66M truly active Indian investors (vs 128M registered PANs, 194M demat accounts).</p>
+</div></div></div>
+
+<!-- Client Growth -->
+<div class="card" id="card-client-growth">
+<div class="card-header" data-card="client-growth"><h3>NSE Active Client Growth — Market Share Dynamics</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr><th>Period</th><th>Groww</th><th>Groww Share</th><th>Angel One</th><th>Industry Total</th></tr></thead>
 <tbody>
 <tr><td>Mar/23</td><td>5.37M</td><td>15.09%</td><td>4.28M</td><td>~31M</td></tr>
 <tr><td>Mar/24</td><td>9.54M</td><td>21.89%</td><td>6.11M</td><td>~40M</td></tr>
 <tr><td><strong>Mar/25</strong></td><td><strong>12.92M</strong></td><td><strong>26.26%</strong></td><td><strong>7.58M</strong></td><td><strong>~49M</strong></td></tr>
 <tr><td>Jun/25 (Q3)</td><td>12.58M</td><td>26.27%</td><td>N/A</td><td>~47.89M</td></tr>
-</tbody></table>
-<div class="insight-box"><strong>Groww captured 45.45% of all net new NSE active clients</strong> in the 12 months ending June 2025. Groww grew at <strong>CAGR 41.7%</strong> (Jun 22-Jun 25) vs industry CAGR of 7.98%.</div>
-</div>
-<div class="card"><h3>Groww &mdash; Financials (from DRHP)</h3>
-<table><thead><tr><th>Metric</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
+<tr><td><strong>Jan/26</strong></td><td><strong>~13.5M</strong></td><td><strong>28.2%</strong></td><td><strong>~7.1M</strong></td><td><strong>~48M</strong></td></tr>
+</tbody></table></div>
+<div class="insight-box"><strong>Groww captured 45.45% of all net new NSE active clients</strong> in the 12 months ending June 2025. Groww grew at <strong>CAGR 41.7%</strong> (Jun 22–Jun 25) vs industry CAGR of 7.98%. By Jan 2026, Groww's share reached 28.2% while Zerodha and Angel One declined.</div>
+</div></div></div>
+
+<!-- Groww Financials -->
+<div class="card" id="card-groww-fins">
+<div class="card-header" data-card="groww-fins"><h3>Groww — Financials (from DRHP)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>FY23</th><th>FY24</th><th>FY25</th></tr></thead>
 <tbody>
 <tr><td>Revenue from Operations</td><td>₹1,248 Cr</td><td>₹2,648 Cr</td><td>₹3,901 Cr</td></tr>
 <tr><td>PAT</td><td>₹458 Cr</td><td>(₹805 Cr) Loss</td><td>₹1,824 Cr</td></tr>
@@ -120,28 +256,36 @@ footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border
 <tr><td>Total Customer Assets</td><td>₹58,174 Cr</td><td>₹1,21,376 Cr</td><td>₹2,16,812 Cr</td></tr>
 <tr><td>Adjusted EBITDA Margin</td><td>N/A</td><td>N/A</td><td>59.11%</td></tr>
 <tr><td>Cost to Serve (% revenue)</td><td>15.85%</td><td>14.68%</td><td>14.62%</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p style="font-size:.85rem;color:var(--text2);margin-top:8px">*FY24 loss due to one-off ESOP/employee compensation costs (₹1,393.78 Cr ESOP charge).</p>
-</div>
-<div class="card"><h3>Brokerage Charges &mdash; Exact Comparison</h3>
-<div style="overflow-x:auto"><table><thead><tr>
+</div></div></div>
+
+<!-- Brokerage Charges -->
+<div class="card" id="card-brokerage">
+<div class="card-header" data-card="brokerage"><h3>Brokerage Charges — Exact Comparison</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr>
 <th>Charge Type</th><th>Angel One</th><th>Zerodha</th><th>Groww</th><th>Upstox</th><th>Dhan</th><th>Motilal Oswal</th>
 </tr></thead><tbody>
 <tr><td><strong>Account Opening</strong></td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td><td>Free</td></tr>
-<tr><td><strong>Demat AMC</strong></td><td>₹60/qtr (yr 2+)</td><td>₹0-300/yr</td><td>₹0</td><td>₹0 (yr 1), ₹300/yr</td><td>₹0 lifetime</td><td>₹0</td></tr>
+<tr><td><strong>Demat AMC</strong></td><td>₹60/qtr (yr 2+)</td><td>₹0–300/yr</td><td>₹0</td><td>₹0 (yr 1), ₹300/yr</td><td>₹0 lifetime</td><td>₹0</td></tr>
 <tr><td><strong>Equity Delivery</strong></td><td>₹20/0.1% (min ₹5)</td><td><span class="tag tag-green">₹0 FREE</span></td><td>₹20/0.1% (min ₹5)</td><td>₹20/2.5%</td><td><span class="tag tag-green">₹0 FREE</span></td><td>0.20%</td></tr>
 <tr><td><strong>Equity Intraday</strong></td><td>₹20/0.1% (min ₹5)</td><td>₹20/0.03%</td><td>₹20/0.1% (min ₹5)</td><td>₹20/0.05%</td><td>₹20/0.03%</td><td><span class="tag tag-green">Lifetime Free</span></td></tr>
 <tr><td><strong>F&O Futures</strong></td><td>₹20</td><td>₹20/0.03%</td><td>₹20/0.1%</td><td>₹20</td><td>₹20</td><td>0.02%</td></tr>
 <tr><td><strong>F&O Options</strong></td><td>₹20</td><td>₹20</td><td>₹20</td><td>₹20</td><td>₹20</td><td>₹20/lot</td></tr>
 <tr><td><strong>Currency F&O</strong></td><td>₹20</td><td>₹20/0.03%</td><td>₹20/0.1%</td><td>₹20</td><td>₹20</td><td>₹20/lot</td></tr>
 <tr><td><strong>Commodity</strong></td><td>₹20</td><td>₹20/0.03%</td><td>Not available</td><td>₹20</td><td>₹20</td><td>0.02%/₹200 lot</td></tr>
-<tr><td><strong>DP Charges</strong></td><td>₹20 + GST</td><td>₹13 + GST</td><td>₹16.5+₹3.5+GST</td><td>₹20 + GST</td><td>₹12.5 + GST</td><td>₹15-25</td></tr>
+<tr><td><strong>DP Charges</strong></td><td>₹20 + GST</td><td>₹13 + GST</td><td>₹16.5+₹3.5+GST</td><td>₹20 + GST</td><td>₹12.5 + GST</td><td>₹15–25</td></tr>
 <tr><td><strong>Auto Square-off</strong></td><td>N/A</td><td>₹50 + GST</td><td>₹50/position</td><td>₹75 + GST</td><td>N/A</td><td>N/A</td></tr>
 </tbody></table></div>
-<div class="insight-box"><strong>Key Pricing Gap:</strong> Only Angel One and Motilal Oswal charge for equity delivery. Zerodha and Dhan offer free delivery. This is Angel One's biggest pricing disadvantage vs discount broker peers.</div>
-</div>
-<div class="card"><h3>MTF Charges Comparison</h3>
-<div style="overflow-x:auto"><table><thead><tr>
+<div class="insight-box"><strong>Key Pricing Gap:</strong> Only Angel One and Motilal Oswal charge for equity delivery among major discount brokers. Zerodha and Dhan offer free delivery. This is Angel One's biggest pricing disadvantage vs discount broker peers.</div>
+</div></div></div>
+
+<!-- MTF Charges -->
+<div class="card" id="card-mtf">
+<div class="card-header" data-card="mtf"><h3>MTF Charges Comparison</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr>
 <th>Broker</th><th>MTF Interest Rate (p.a.)</th><th>Daily Rate</th><th>MTF Brokerage</th><th>Max Leverage</th>
 </tr></thead><tbody>
 <tr><td><strong>Angel One</strong></td><td>14.99%</td><td>0.041%/day</td><td>₹20/0.1%</td><td>Up to 4x</td></tr>
@@ -152,9 +296,13 @@ footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border
 <tr><td><strong>Motilal Oswal</strong></td><td>15%</td><td>0.041%/day</td><td>Standard brokerage</td><td>Up to 4x, 365+ day hold</td></tr>
 </tbody></table></div>
 <div class="insight-box"><strong>Dhan has the lowest MTF rate (12.49%)</strong> and zero delivery brokerage. Upstox has the highest at ~18.25%. Angel One is in the middle at 14.99%.</div>
-</div>
-<div class="card"><h3>Platform &amp; Product Comparison</h3>
-<div style="overflow-x:auto"><table><thead><tr>
+</div></div></div>
+
+<!-- Platform Comparison -->
+<div class="card" id="card-platform">
+<div class="card-header" data-card="platform"><h3>Platform &amp; Product Comparison</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="table-wrap"><table><thead><tr>
 <th>Feature</th><th>Angel One</th><th>Zerodha</th><th>Groww</th><th>Upstox</th><th>Dhan</th><th>Motilal Oswal</th>
 </tr></thead><tbody>
 <tr><td><strong>Mobile App</strong></td><td>Angel One App</td><td>Kite</td><td>Groww App</td><td>Upstox Pro</td><td>Dhan App</td><td>MO Investor/Trader</td></tr>
@@ -168,21 +316,25 @@ footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border
 <tr><td><strong>Smallcase</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
 <tr><td><strong>Desktop</strong></td><td>Trade Smart</td><td>Kite Desktop</td><td>❌</td><td>Upstox Pro</td><td>Dhan Tradet</td><td>MO Trader</td></tr>
 </tbody></table></div>
-<div class="insight-box"><strong>Dhan has the most advanced tech stack</strong>: free full TradingView, Fuzz AI, DhanHQ API, copy trading. Zerodha's Kite is gold standard for trading. Groww is simplest but has highest market share.</div>
-</div>
-<div class="card"><h3>Unique Differentiators &mdash; Each Broker</h3>
+<div class="insight-box"><strong>Dhan has the most advanced tech stack</strong>: free full TradingView, Fuzz AI (agentic AI), DhanHQ API, copy trading. Zerodha's Kite is gold standard for trading UX. Groww is simplest but has the highest market share.</div>
+</div></div></div>
+
+<!-- Unique Differentiators -->
+<div class="card" id="card-differentiators">
+<div class="card-header" data-card="differentiators"><h3>Unique Differentiators — Each Broker</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <h4>Groww</h4>
 <ul>
-<li>Largest active client base (12.92M) with 26.3% NSE market share</li>
-<li><strong>83%+ organic acquisition</strong> &mdash; no DRA channel. Brand + product-led.</li>
-<li>Listed Jun 25 &mdash; stock up 64% from IPO; ~₹1.2L Cr market cap</li>
+<li>Largest active client base (13.5M+) with 28.2% NSE market share (Jan 2026)</li>
+<li><strong>83%+ organic acquisition</strong> — no DRA channel. Brand + product-led.</li>
+<li>Listed Jun 25 — stock up 64% from IPO; ~₹1.2L Cr market cap</li>
 <li>100M+ cumulative downloads (only Indian investment app)</li>
 <li>Strongest cross-sell: 53.33% use 2+ products; 3-year cohort retention 77.70%</li>
 <li>IPO: Fresh Issue ₹1,060 Cr + OFS 574M shares; Price ₹100, Current ~₹193</li>
 </ul>
 <h4>Angel One</h4>
 <ul>
-<li><strong>DRA channel</strong> &mdash; unique partner acquisition model (none of top competitors have this at scale)</li>
+<li><strong>DRA channel</strong> — unique partner acquisition model (none of top competitors have this at scale)</li>
 <li>CPA optimized from ₹423 → ₹202 in 6 months (52% reduction)</li>
 <li>29+ years of brand presence; listed parent</li>
 <li>Full product suite across all segments</li>
@@ -192,13 +344,13 @@ footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border
 <ul>
 <li>Pioneer discount broker; most respected brand in Indian broking</li>
 <li>Kite = gold standard trading platform interface</li>
-<li>Varsity &mdash; massive education moat (financial literacy content)</li>
-<li>Kite Connect &mdash; largest API developer ecosystem</li>
-<li><strong>Weakness:</strong> Active client base declining &mdash; lost ~11L clients in past year</li>
+<li>Varsity — massive education moat (financial literacy content)</li>
+<li>Kite Connect — largest API developer ecosystem</li>
+<li><strong>Weakness:</strong> Active client base declining — lost ~11L clients in past year</li>
 </ul>
 <h4>Upstox</h4>
 <ul>
-<li>Backed by Ratan Tata + Tiger Global &mdash; strong brand association</li>
+<li>Backed by Ratan Tata + Tiger Global — strong brand association</li>
 <li>Good brand recognition through marketing</li>
 <li>Decent tech platform but not #1 in any single dimension</li>
 </ul>
@@ -206,75 +358,166 @@ footer{text-align:center;padding:32px;color:var(--text2);font-size:.85rem;border
 <ul>
 <li><strong>Most aggressive pricing:</strong> ₹0 delivery, ₹0 lifetime demat AMC, 12.49% MTF</li>
 <li><strong>Highest profit margin among discount brokers</strong> (46.5% PAT margin)</li>
-<li><strong>Fuzz AI</strong> (agentic AI) &mdash; first-mover advantage in AI-powered finance</li>
-<li><strong>Full TradingView</strong> (free) &mdash; best charting among discount brokers</li>
-<li><strong>Copy trading + DhanHQ free APIs</strong> &mdash; attracts active traders</li>
-<li>Women's pricing: 50% discount &mdash; industry-first</li>
+<li><strong>Fuzz AI</strong> (agentic AI) — first-mover advantage in AI-powered finance</li>
+<li><strong>Full TradingView</strong> (free) — best charting among discount brokers</li>
+<li><strong>Copy trading + DhanHQ free APIs</strong> — attracts active traders</li>
+<li>Women's pricing: 50% discount — industry-first</li>
 <li>Fastest-growing in net client additions (3rd overall Mar 26)</li>
 <li>Unicorn: $1.2B valuation (Oct 2025), $120M Series B</li>
 </ul>
 <h4>Motilal Oswal</h4>
 <ul>
-<li>Full-service broker &mdash; different segment (HNI, advisory-seeking)</li>
+<li>Full-service broker — different segment (HNI, advisory-seeking)</li>
 <li>Strong research desk with buy/sell calls</li>
 <li>PMS for high net worth individuals</li>
 <li>2,520+ branches across India</li>
 <li>36+ years of market presence</li>
-<li><strong>Not a direct DRA competitor</strong> &mdash; targets different audience</li>
+<li><strong>Not a direct DRA competitor</strong> — targets different audience</li>
 </ul>
-</div>
-<div class="card"><h3>Industry Context (from Groww DRHP)</h3>
+</div></div></div>
+
+<!-- Industry Context -->
+<div class="card" id="card-industry-context">
+<div class="card-header" data-card="industry-context"><h3>Industry Context (from Groww DRHP &amp; NSE)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="metric-grid">
 <div class="metric-card"><div class="val">₹1.1T</div><div class="lbl">I&WM TAM (Mar 25)</div></div>
-<div class="metric-card"><div class="val">₹2.2-2.6T</div><div class="lbl">Projected TAM by Mar 30</div></div>
+<div class="metric-card"><div class="val">₹2.2–2.6T</div><div class="lbl">Projected TAM by Mar 30</div></div>
 <div class="metric-card"><div class="val">5%</div><div class="lbl">Active Broking Penetration</div></div>
 <div class="metric-card"><div class="val">~62%</div><div class="lbl">US Active Broking Penetration</div></div>
-<div class="metric-card"><div class="val">~49M</div><div class="lbl">NSE Active Clients (Mar 25)</div></div>
-<div class="metric-card"><div class="val">~5M</div><div class="lbl">NSE Active Clients (Mar 16)</div></div>
+<div class="metric-card"><div class="val">~66M</div><div class="lbl">Truly Active Investors (Jan 26)</div></div>
+<div class="metric-card"><div class="val">194M</div><div class="lbl">Total Demat Accounts</div></div>
 </div>
 <h4>Key Industry Data Points</h4>
 <ul>
-<li>Only <strong>16-18%</strong> of Indian adults have a demat account; only <strong>~5%</strong> active broking penetration</li>
-<li>Mutual Fund AUM/GDP: ~20% (India) vs 132% (US) vs 60% (Japan) &mdash; <strong>runway is >10x</strong></li>
-<li>Digital-first platforms hold <strong>76-78%</strong> of NSE active client share</li>
-<li>Captured <strong>~85%</strong> of incremental new clients FY20-FY25</li>
+<li>Only <strong>16–18%</strong> of Indian adults have a demat account; only <strong>~5%</strong> active broking penetration</li>
+<li>Mutual Fund AUM/GDP: ~20% (India) vs 132% (US) vs 60% (Japan) — <strong>runway is &gt;10x</strong></li>
+<li>Digital-first platforms hold <strong>76–78%</strong> of NSE active client share</li>
+<li>Captured <strong>~85%</strong> of incremental new clients FY20–FY25</li>
 <li>Digital-first profit margin: <strong>~42%</strong> vs bank-led (~32%) vs wealth management (~29%)</li>
 <li>Digital-first revenue CAGR: <strong>~60%</strong> vs bank-led (~23%) vs wealth managers (~25%)</li>
-<li>F&O notional ADTO contracted <strong>~38%</strong> (Jun 24-Jun 25)</li>
-<li>Individual investor F&O participation: <strong>-36%</strong> in same period</li>
+<li>F&O notional ADTO contracted <strong>~38%</strong> (Jun 24–Jun 25)</li>
+<li>Individual investor F&O participation: <strong>−36%</strong> in same period</li>
 <li>Industry MTF book: <strong>₹84,659 Cr</strong> (Jun 25), up ~25% from Mar 24</li>
 <li>Individual investor turnover: ₹70T (FY20) → <strong>₹193T</strong> (FY25)</li>
 </ul>
-<div class="insight-box"><strong>Bottom Line:</strong> India's broking market is still early-stage with >10x growth potential. Digital-first platforms are winning. F&O tightening is a short-term headwind but long-term healthy. MTF is the fastest-growing product.</div>
+<div class="insight-box"><strong>Bottom Line:</strong> India's broking market is still early-stage with &gt;10x growth potential. Digital-first platforms are winning. F&O tightening is a short-term headwind but long-term healthy. MTF is the fastest-growing product.</div>
+</div></div></div>
+
+</div></div></section>
+
+<!-- ═══════════════════════ 2. MUST-KNOW COMPANY PROFILES ═══════════════════════ -->
+<section id="profiles">
+<div class="section-header" data-section="profiles">
+<span class="section-num">Sec 2</span>
+<h2>Must-Know Company Profiles</h2>
+<span class="accordion-icon">+</span>
 </div>
-</section>
-<section id="case-studies"><h2>Strategic Case Studies &mdash; With Sample Answers</h2>
+<div class="section-body"><div class="section-body-inner">
+<p class="section-desc">Quick-reference profiles of the 6 major Indian stock broking players. Know these cold — CEO names, founding dates, and key facts.</p>
+<div class="card" id="card-profiles-table">
+<div class="card-header open" data-card="profiles-table"><h3>Company Profiles at a Glance</h3><span class="card-icon">+</span></div>
+<div class="card-body open"><div class="card-body-inner">
+<div class="table-wrap"><table class="profiles-table"><thead><tr>
+<th>Company</th><th>CEO / Founder</th><th>Founded</th><th>HQ</th><th>Valuation</th><th>Employees</th><th>Key Fact</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Groww</strong></td>
+<td>Lalit Keshre, Harsh Jain, Neeraj Singh, Ishan Bansal</td>
+<td>2016</td>
+<td>Bengaluru</td>
+<td>~₹1.2L Cr (listed)</td>
+<td>~2,500+</td>
+<td>Only Indian investment app with 100M+ downloads; 28.2% NSE share</td>
+</tr>
+<tr>
+<td><strong>Zerodha</strong></td>
+<td>Nithin Kamath, Nikhil Kamath</td>
+<td>2010</td>
+<td>Bengaluru</td>
+<td>~$5–6B (est.)</td>
+<td>~1,200</td>
+<td>Bootstrapped; never raised external funding; pioneer of discount broking</td>
+</tr>
+<tr>
+<td><strong>Angel One</strong></td>
+<td>Dinesh Thakkar</td>
+<td>1996</td>
+<td>Mumbai</td>
+<td>Listed (NSE/BSE)</td>
+<td>~4,000+</td>
+<td>29+ years; only major broker with DRA partner acquisition model at scale</td>
+</tr>
+<tr>
+<td><strong>Upstox</strong></td>
+<td>Ravi Kumar, Shrini Viswanath</td>
+<td>2009</td>
+<td>Mumbai</td>
+<td>$3.4B (2022 peak)</td>
+<td>~1,500+</td>
+<td>Ratan Tata backed; Tiger Global invested</td>
+</tr>
+<tr>
+<td><strong>Dhan</strong></td>
+<td>Pravin Jadhav (ex-Paytm Money)</td>
+<td>2021</td>
+<td>Mumbai</td>
+<td>$1.2B (Unicorn, Oct 2025)</td>
+<td>~500+</td>
+<td>Youngest broking unicorn; 46.5% PAT margin — highest among discount brokers</td>
+</tr>
+<tr>
+<td><strong>Motilal Oswal</strong></td>
+<td>Motilal Oswal, Raamdeo Agarwal</td>
+<td>1987</td>
+<td>Mumbai</td>
+<td>Listed (₹30K+ Cr mcap)</td>
+<td>~10,000+</td>
+<td>Full-service leader; 2,520+ branches; 36+ years of trust</td>
+</tr>
+</tbody></table></div>
+</div></div></div>
+</div></div></section>
+
+<!-- ═══════════════════════ 3. STRATEGIC CASE STUDIES (7) ═══════════════════════ -->
+<section id="case-studies">
+<div class="section-header" data-section="case-studies">
+<span class="section-num">Sec 3</span>
+<h2>Strategic Case Studies — With Sample Answers</h2>
+<span class="accordion-icon">+</span>
+</div>
+<div class="section-body"><div class="section-body-inner">
 <p class="section-desc">Each case includes the problem statement, framework/approach, and a sample answer drawing on real Angel One experience.</p>
-<div class="card"><h3>Case 1: Acquisition costs are rising 30% YoY. Reduce blended CPA by 25%.</h3>
-<p><strong>Scenario:</strong> You join as Head of Acquisition at Upstox. CPA has been climbing. CEO wants 25% reduction while maintaining volume.</p>
-<hr>
+
+<!-- Case 1 -->
+<div class="card" id="card-case1">
+<div class="card-header" data-card="case1"><h3>Case 1: Acquisition costs rising 30% YoY. Reduce blended CPA by 25%.</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> You join as Head of Acquisition at Upstox. CPA has been climbing. CEO wants 25% reduction while maintaining volume.</p><hr>
 <h4>Framework</h4>
 <div class="framework-grid">
 <div class="framework-item"><strong>1. Diagnose</strong><span>Segment channels. Which is rising fastest? Fixed vs variable cost?</span></div>
 <div class="framework-item"><strong>2. Funnel Analysis</strong><span>Impressions → clicks → signups → KYC → funded → traded. Where is leakage?</span></div>
-<div class="framework-item"><strong>3. Identify Levers</strong><span>Organic (brand, referrals, SEO) &middot; Paid retargeting &middot; Payout restructuring &middot; Product-led growth &middot; Inactive base reactivation</span></div>
-<div class="framework-item"><strong>4. Prioritize</strong><span>Which 2-3 levers have highest impact with lowest implementation cost?</span></div>
-</div>
-<hr>
+<div class="framework-item"><strong>3. Identify Levers</strong><span>Organic (brand, referrals, SEO) · Paid retargeting · Payout restructuring · Product-led growth · Inactive base reactivation</span></div>
+<div class="framework-item"><strong>4. Prioritize</strong><span>Which 2–3 levers have highest impact with lowest implementation cost?</span></div>
+</div><hr>
 <div class="answer"><strong>Sample Answer:</strong><br><br>
-<strong>I would start by segmenting acquisition costs by channel to identify the biggest offenders. At Angel One, I found that volume DRAs on fixed payouts (₹250/kyc) were our highest cost with near-zero return &mdash; 90% of FYR came from 10% of KYCs. We restructured to a self-selection quality-tier model.<br><br>
+<strong>I would start by segmenting acquisition costs by channel to identify the biggest offenders. At Angel One, I found that volume DRAs on fixed payouts (₹250/kyc) were our highest cost with near-zero return — 90% of FYR came from 10% of KYCs. We restructured to a self-selection quality-tier model.<br><br>
 For Upstox, the approach would be similar:<br>
-1. <strong>Disaggregate:</strong> Split CPA by channel &mdash; paid search, social, organic, referrals, affiliate. Find which channel has the worst cost-to-revenue ratio.<br>
+1. <strong>Disaggregate:</strong> Split CPA by channel — paid search, social, organic, referrals, affiliate. Find which channel has the worst cost-to-revenue ratio.<br>
 2. <strong>Reallocate budget:</strong> Shift spend toward channels with better unit economics. Kill or cap underperforming channels.<br>
-3. <strong>Product-led growth:</strong> Build referral loops into the product. Drop a "Refer a friend &mdash; earn ₹200" nudge right after a user completes their first trade.<br>
+3. <strong>Product-led growth:</strong> Build referral loops into the product. Drop a "Refer a friend — earn ₹200" nudge right after a user completes their first trade.<br>
 4. <strong>Retarget:</strong> Users who signed up but never funded are a free acquisition channel. Re-engage via email/SMS with a small incentive.<br>
-5. <strong>Re-activate:</strong> Inactive clients are 3-5x cheaper to re-activate than acquire new ones. Run targeted campaigns.<br><br>
-At Angel One we reduced CPA from ₹423 to ₹202 &mdash; a 52% reduction &mdash; primarily by restructuring offers based on DRA performance tier, not across-the-board cuts.</strong></div>
-<div class="insight-box"><strong>Interview Tip:</strong> Lead with data &mdash; mention the 90/10 rule (90% of revenue from 10% of sources). Use the actual ₹423→₹202 trajectory as evidence.</div>
-</div>
-<div class="card"><h3>Case 2: Design an acquisition channel from scratch &mdash; partner/referral program at Zerodha</h3>
-<p><strong>Scenario:</strong> Zerodha wants to launch a partner/referral channel for the first time. Target: 50K new clients/quarter. How do you build it?</p>
-<hr>
+5. <strong>Re-activate:</strong> Inactive clients are 3–5x cheaper to re-activate than acquire new ones. Run targeted campaigns.<br><br>
+At Angel One we reduced CPA from ₹423 to ₹202 — a 52% reduction — primarily by restructuring offers based on DRA performance tier, not across-the-board cuts.</strong></div>
+<div class="insight-box"><strong>Interview Tip:</strong> Lead with data — mention the 90/10 rule (90% of revenue from 10% of sources). Use the actual ₹423→₹202 trajectory as evidence.</div>
+</div></div></div>
+
+<!-- Case 2 -->
+<div class="card" id="card-case2">
+<div class="card-header" data-card="case2"><h3>Case 2: Design an acquisition channel from scratch — partner/referral program at Zerodha</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> Zerodha wants to launch a partner/referral channel for the first time. Target: 50K new clients/quarter. How do you build it?</p><hr>
 <h4>Framework</h4>
 <div class="framework-grid">
 <div class="framework-item"><strong>1. Channel Structure</strong><span>Direct referral? Tiered partner system? Agency model?</span></div>
@@ -283,142 +526,338 @@ At Angel One we reduced CPA from ₹423 to ₹202 &mdash; a 52% reduction &mdash
 <div class="framework-item"><strong>4. Tech Stack</strong><span>Tracking infra, dashboard, automated payouts, real-time reporting</span></div>
 <div class="framework-item"><strong>5. Scale Path</strong><span>Grow from 0 → 50 → 500 → 5000 partners with systems intact</span></div>
 <div class="framework-item"><strong>6. Unit Economics</strong><span>Target CPA, COA, activation rate. What is viable for Zerodha?</span></div>
-</div>
-<hr>
+</div><hr>
 <div class="answer"><strong>Sample Answer:</strong><br><br>
 <strong>Zerodha has never had a referral channel, which is both a risk and an opportunity. Here is how I would approach it:<br><br>
-<u>Phase 1 &mdash; Design (Month 1-2):</u><br>
-&bull; <strong>Structure:</strong> Two-tier model &mdash; direct referral (existing clients refer friends) + partner tier (influencers/content creators with 10K+ followers). Direct referral gets a one-time ₹200 credit. Partners get ₹200 fixed + 10% of referred client first 3 months brokerage.<br>
-&bull; <strong>Compliance:</strong> No revenue sharing promises. Fixed payout structure only &mdash; SEBI-compliant since Aug 2024 circular.<br>
-&bull; <strong>Quality:</strong> Minimum hold period (client must trade ₹1,000+ to count). Verification via social media for partners.<br><br>
-<u>Phase 2 &mdash; Pilot (Month 3):</u><br>
-&bull; Seed with top 500 Kite users (highest engagement, lower churn)<br>
-&bull; Track: referral conversion rate, CPA, activation rate, 30-day retention<br>
-&bull; Target metrics: 15%+ referral conversion, CPA ≤ ₹150, activation ≥ 60%<br><br>
-<u>Phase 3 &mdash; Scale (Month 4-6):</u><br>
-&bull; Open to all users with in-app referral flows<br>
-&bull; Launch partner tier &mdash; onboard 50-100 influencers in first quarter<br>
-&bull; Target: 12,500 clients/month from referrals = 50K/quarter<br><br>
-The key lesson from Angel One: <strong>payout structure drives behavior.</strong> If you pay flat per KYC, partners optimize for volume, not quality. Structure payouts to reward quality &mdash; client activation, first trade, continued trading. Zerodha's brand trust would give them a significant advantage &mdash; partners would accept lower upfront payouts for the Zerodha brand association.</strong></div>
-</div>
-<div class="card"><h3>Case 3: Activation rate is 2%. How do you get it to 15%?</h3>
-<p><strong>Scenario:</strong> Motilal Oswal launched a new discount brokerage product. Users sign up but don't place their first trade. Activation rate is 2%. What's the strategy?</p>
-<hr>
+<u>Phase 1 — Design (Month 1–2):</u><br>
+· <strong>Structure:</strong> Two-tier model — direct referral (existing clients refer friends) + partner tier (influencers/content creators with 10K+ followers). Direct referral gets a one-time ₹200 credit. Partners get ₹200 fixed + 10% of referred client first 3 months brokerage.<br>
+· <strong>Compliance:</strong> No revenue sharing promises. Fixed payout structure only — SEBI-compliant since Aug 2024 circular.<br>
+· <strong>Quality:</strong> Minimum hold period (client must trade ₹1,000+ to count). Verification via social media for partners.<br><br>
+<u>Phase 2 — Pilot (Month 3):</u><br>
+· Seed with top 500 Kite users (highest engagement, lower churn)<br>
+· Track: referral conversion rate, CPA, activation rate, 30-day retention<br>
+· Target metrics: 15%+ referral conversion, CPA ≤ ₹150, activation ≥ 60%<br><br>
+<u>Phase 3 — Scale (Month 4–6):</u><br>
+· Open to all users with in-app referral flows<br>
+· Launch partner tier — onboard 50–100 influencers in first quarter<br>
+· Target: 12,500 clients/month from referrals = 50K/quarter<br><br>
+The key lesson from Angel One: <strong>payout structure drives behavior.</strong> If you pay flat per KYC, partners optimize for volume, not quality. Structure payouts to reward quality — client activation, first trade, continued trading. Zerodha's brand trust would give them a significant advantage — partners would accept lower upfront payouts for the Zerodha brand association.</strong></div>
+</div></div></div>
+
+<!-- Case 3 -->
+<div class="card" id="card-case3">
+<div class="card-header" data-card="case3"><h3>Case 3: Activation rate is 2%. How do you get it to 15%?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> Motilal Oswal launched a new discount brokerage product. Users sign up but don't place their first trade. Activation rate is 2%. What's the strategy?</p><hr>
 <h4>Framework</h4>
 <div class="framework-grid">
 <div class="framework-item"><strong>1. Define Activation</strong><span>What is the 'Aha!' moment? First trade? First deposit? First ₹10K portfolio?</span></div>
 <div class="framework-item"><strong>2. Diagnose Drop-off</strong><span>Funnel: Registration → KYC → Funding → First Trade. Where do most users drop?</span></div>
 <div class="framework-item"><strong>3. Identify Levers</strong><span>Product onboarding, incentives, education, RM follow-up, platform UX</span></div>
 <div class="framework-item"><strong>4. Cohort Analysis</strong><span>Week 1 vs Week 4 activation. Which channels have highest activation?</span></div>
-</div>
-<hr>
+</div><hr>
 <div class="answer"><strong>Sample Answer:</strong><br><br>
-<strong>At Angel One, I faced this exact problem &mdash; DRA activation was under 1% in Sep 25. We increased it to ~7% by Dec 25. The playbook:<br><br>
+<strong>At Angel One, I faced this exact problem — DRA activation was under 1% in Sep 25. We increased it to ~7% by Dec 25. The playbook:<br><br>
 <u>Step 1: Diagnose the bottleneck</u><br>
-We traced new DRA behavior and found they weren't understanding the payout model &mdash; they saw '35% brokerage sharing' but couldn't visualize their earnings. The problem wasn't willingness, it was comprehension.<br><br>
-<u>Step 2: Targeted intervention &mdash; activation webinars</u><br>
-We launched live educational webinars that simulated earnings &mdash; "If you bring 10 clients with ₹200 average FYR, you earn ₹700 in fixed payout + ₹700 in brokerage share = ₹1,400 total." Made the math tangible.<br><br>
+We traced new DRA behavior and found they weren't understanding the payout model — they saw '35% brokerage sharing' but couldn't visualize their earnings. The problem wasn't willingness, it was comprehension.<br><br>
+<u>Step 2: Targeted intervention — activation webinars</u><br>
+We launched live educational webinars that simulated earnings — "If you bring 10 clients with ₹200 average FYR, you earn ₹700 in fixed payout + ₹700 in brokerage share = ₹1,400 total." Made the math tangible.<br><br>
 <u>Step 3: Simplified first action</u><br>
 Instead of asking new DRAs to "go get clients," we asked them to "share your referral link with 3 friends today." Much lower barrier. Once they saw the first KYC come through, they were hooked.<br><br>
 <u>Step 4: RM follow-up protocol</u><br>
 New DRAs got a WhatsApp message on Day 1, a call on Day 3, and payout reminder on Day 7. Structured cadence, not random outreach.<br><br>
 <u>Step 5: First-trade bonus</u><br>
-"Bring 3 clients who each place one trade &mdash; earn ₹500 bonus." Incentivized both acquisition and activation.<br><br>
+"Bring 3 clients who each place one trade — earn ₹500 bonus." Incentivized both acquisition and activation.<br><br>
 For Motilal Oswal's retail product, I would apply similar thinking but adapted for end-users: virtual portfolio mode to practice first, a guided first trade experience (buy ₹500 of NIFTYBEES), and a first-trade reward (₹100 free brokerage credit upon completion).</strong></div>
-<div class="insight-box"><strong>Sample answer draws directly from real work</strong> &mdash; activation from less than 1% to ~7% at Angel One. Concrete numbers make the answer credible.</div>
-</div>
-<div class="card"><h3>Case 4: Groww launched MTF. Zerodha's response?</h3>
-<p><strong>Scenario:</strong> You're at Zerodha. Groww's MTF product reached ₹1,036 Cr book. Zerodha already has MTF. How do you defend/win?</p>
-<hr>
+<div class="insight-box"><strong>Sample answer draws directly from real work</strong> — activation from less than 1% to ~7% at Angel One. Concrete numbers make the answer credible.</div>
+</div></div></div>
+
+<!-- Case 4 -->
+<div class="card" id="card-case4">
+<div class="card-header" data-card="case4"><h3>Case 4: Groww launched MTF. Zerodha's response?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> You're at Zerodha. Groww's MTF product reached ₹1,036 Cr book. Zerodha already has MTF. How do you defend/win?</p><hr>
 <div class="answer"><strong>Sample Answer:</strong><br><br>
-<strong>Let me contextualize the MTF market first: Industry MTF book is ₹84,659 Cr (Jun 25), growing 25% YoY. Groww has 1.22% market share &mdash; they're small but growing fast. Dhan has the lowest rate at 12.49%.<br><br>
+<strong>Let me contextualize the MTF market first: Industry MTF book is ₹84,659 Cr (Jun 25), growing 25% YoY. Groww has 1.22% market share — they're small but growing fast. Dhan has the lowest rate at 12.49%.<br><br>
 Zerodha's advantages: Kite is the #1 trading platform. Our user base is more trading-oriented than Groww's (Groww started as MF platform, their users lean investing). MTF is more relevant for traders than investors.<br><br>
 The strategy:<br>
-<strong>1. Price optimization:</strong> Match Dhan's 12.49% for high-volume traders. Keep standard 14.6% for retail. Don't need to blanket-cut &mdash; use smart segmentation.<br>
-<strong>2. Feature differentiation:</strong> More stock eligibility (Groww lists ~200, Zerodha can do 500+). Better MTF analytics in Kite &mdash; show users exactly how much they'd earn vs cost.<br>
+<strong>1. Price optimization:</strong> Match Dhan's 12.49% for high-volume traders. Keep standard 14.6% for retail. Don't need to blanket-cut — use smart segmentation.<br>
+<strong>2. Feature differentiation:</strong> More stock eligibility (Groww lists ~200, Zerodha can do 500+). Better MTF analytics in Kite — show users exactly how much they'd earn vs cost.<br>
 <strong>3. Bundle:</strong> Zerodha MTF + Kite API = powerful for algo traders. Build a "leverage optimizer" tool that suggests optimal MTF usage based on trading patterns.<br>
 <strong>4. Education moat:</strong> Varsity already has MTF explainers. Create Varsity module: "When to use MTF vs when to avoid it." Builds trust and positions Zerodha as the responsible broker.<br><br>
-Long-term: MTF is a commoditizing product. Price will converge. The moat is the ecosystem &mdash; Kite + Varsity + API + community. Don't win on MTF price, win on the platform.</strong></div>
-</div>
-<div class="card"><h3>Case 5: SEBI tightened F&O. Volumes down 35%. Growth plan?</h3>
-<p><strong>Scenario:</strong> Industry F&O notional ADTO contracted 38% (Jun 24-Jun 25). Your firm is F&O-heavy. How do you pivot growth strategy?</p>
-<hr>
+Long-term: MTF is a commoditizing product. Price will converge. The moat is the ecosystem — Kite + Varsity + API + community. Don't win on MTF price, win on the platform.</strong></div>
+</div></div></div>
+
+<!-- Case 5 -->
+<div class="card" id="card-case5">
+<div class="card-header" data-card="case5"><h3>Case 5: SEBI tightened F&O. Volumes down 35%. Growth plan?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> Industry F&O notional ADTO contracted 38% (Jun 24–Jun 25). Your firm is F&O-heavy. How do you pivot growth strategy?</p><hr>
 <div class="answer"><strong>Sample Answer:</strong><br><br>
-<strong>This is real &mdash; the SEBI tightening has already hit. Individual investor F&O participation is down 36% in the same period. Here's the playbook:<br><br>
+<strong>This is real — the SEBI tightening has already hit. Individual investor F&O participation is down 36% in the same period. Here's the playbook:<br><br>
 <strong>1. Revenue rebalancing (short-term):</strong> Push delivery volumes. Launch MTF bonus campaigns. Increase mutual fund distribution revenue. Float income becomes more important.<br>
 <strong>2. Product expansion (medium-term):</strong> Wealth management, PMS-lite, international investing, bond market access. Broaden the revenue base beyond F&O.<br>
-<strong>3. Client conversion (ongoing):</strong> Convert F&O traders to longer-term delivery investors. Run campaigns: "From speculative to systematic &mdash; build your portfolio."<br>
+<strong>3. Client conversion (ongoing):</strong> Convert F&O traders to longer-term delivery investors. Run campaigns: "From speculative to systematic — build your portfolio."<br>
 <strong>4. Cost structure (immediate):</strong> F&O revenue was subsidizing low-margin acquisition. Without F&O volumes, CPA targets need to be more aggressive. Revisit payout structures.<br>
 <strong>5. Acquisition focus shift:</strong> Acquire investors, not traders. Long-term investors have lower churn and build AUM over time. Adjust marketing messaging from "lowest brokerage" to "build wealth."<br><br>
 The industry is moving from a volume game (F&O turnover) to a value game (AUM, client lifetime value). Brokers who adapt faster will win the next phase.</strong></div>
+</div></div></div>
+
+<!-- Case 6 (NEW) -->
+<div class="card" id="card-case6">
+<div class="card-header" data-card="case6"><h3>Case 6: Dhan achieves unicorn status with 46.5% PAT margin. How does Zerodha respond?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> Dhan is now a unicorn ($1.2B valuation, Oct 2025) with FY25 PAT of ₹408 Cr at 46.5% margin — the highest among all discount brokers. They're growing faster than Zerodha in net client additions. You're on Zerodha's strategy team. What's the competitive response?</p><hr>
+<h4>Framework</h4>
+<div class="framework-grid">
+<div class="framework-item"><strong>1. Diagnose Dhan's Edge</strong><span>Pricing (₹0 delivery, 12.49% MTF) + Tech (Fuzz AI, TradingView, copy trading, free APIs) + young founder energy</span></div>
+<div class="framework-item"><strong>2. Zerodha's Strengths</strong><span>Brand trust, Kite UX, Varsity, Kite Connect, profitability, 15 years of operating history</span></div>
+<div class="framework-item"><strong>3. Zerodha's Gaps</strong><span>No AI, no copy trading, no US stocks, declining active clients, no DRA/referral</span></div>
+<div class="framework-item"><strong>4. Response Options</strong><span>Match pricing? Build AI? Launch referral? Double down on core?</span></div>
+</div><hr>
+<div class="answer"><strong>Sample Answer:</strong><br><br>
+<strong>This is a classic innovator's dilemma. Zerodha is the incumbent; Dhan is the disruptor. The wrong response is to copy Dhan's playbook — that would be playing their game on their terms. The right response is asymmetric:<br><br>
+<u>What Zerodha should NOT do:</u><br>
+· <strong>Price war:</strong> Zerodha is profitable. Dhan is too. A price war would hurt Zerodha's margins more (larger base) and wouldn't differentiate. Dhan already has the lowest pricing — you can't undercut them meaningfully.<br>
+· <strong>Copy Fuzz AI:</strong> Building an AI assistant from scratch when Dhan has first-mover advantage is a losing battle. Instead, integrate AI differently.<br><br>
+<u>What Zerodha SHOULD do:</u><br>
+<strong>1. Ecosystem locking — the Kite moat:</strong> Kite Connect has the largest third-party developer ecosystem. Double down: launch a Kite App Store where independent developers can sell trading strategies, indicators, and bots. Revenue share with developers. This creates a platform effect Dhan cannot replicate.<br>
+<strong>2. Launch "Zerodha Prime":</strong> A premium tier for power users — <strong>zero brokerage on all segments</strong> for a flat ₹999/month subscription. Bundles: premium support, advanced analytics, priority IPO allotment, exclusive research. This attacks Dhan's pricing advantage while creating recurring revenue.<br>
+<strong>3. Acquire, don't build:</strong> Zerodha has cash reserves (estimated ₹4,000+ Cr). Acquire a small AI startup or partner with an existing AI platform. Don't build from scratch — time-to-market matters.<br>
+<strong>4. Launch a referral channel — finally:</strong> Dhan is eating Zerodha's lunch on acquisition because Zerodha has zero partner/referral model. A modest referral program (₹200/trader + free brokerage credit) could reactivate the 7M+ user base as ambassadors.<br>
+<strong>5. International expansion:</strong> Dhan is India-only. Zerodha has the brand and platform to expand to Southeast Asia (Indonesia, Vietnam — similar demographics to India 5 years ago). Open a new TAM while Dhan fights in India.<br><br>
+<u>Core strategic insight:</u> Dhan's 46.5% margin is impressive but it's on a small base (₹877 Cr revenue). Zerodha has ~7x Dhan's revenue. Dhan's margin will compress as they scale — customer support costs, compliance, brand building. Zerodha should play the long game: deepen the ecosystem, add subscription revenue, and expand geographically.</strong></div>
+<div class="insight-box"><strong>Key to a strong answer:</strong> Don't just say "match pricing." Show strategic thinking — asymmetric response, playing to Zerodha's strengths (ecosystem, developer network, cash reserves) rather than fighting Dhan on their turf (pricing, AI, social features).</div>
+</div></div></div>
+
+<!-- Case 7 (NEW) -->
+<div class="card" id="card-case7">
+<div class="card-header" data-card="case7"><h3>Case 7: SEBI Stock Broker Regulations 2026 overhaul — strategy shift?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Scenario:</strong> In January 2026, SEBI announced the first comprehensive overhaul of Stock Broker Regulations in 30 years. Key changes include stricter client fund handling, enhanced cybersecurity requirements, mandatory algo trading framework (April 2026), and a "qualified client" classification system. You're on Angel One's strategy team. How does this change your competitive positioning and product roadmap?</p><hr>
+<div class="answer"><strong>Sample Answer:</strong><br><br>
+<strong>This is a landmark regulatory shift — the first overhaul in 30 years. The implications are deep for strategy, product, and cost structure. Let me break it down:<br><br>
+<u>1. Immediate Compliance Impact (0–3 months):</u><br>
+· <strong>Client fund handling:</strong> SEBI's new rules likely mandate more frequent settlement of client funds and stricter segregation. This impacts float income — a significant revenue line for all brokers. Angel One should model a 15–20% reduction in float income and adjust revenue forecasts.<br>
+· <strong>Cybersecurity:</strong> Enhanced requirements mean higher tech spend. This is actually a <strong>moat builder for larger brokers</strong> — smaller/regional brokers may not afford the compliance burden. Angel One's ₹5,238 Cr revenue base gives it an advantage over sub-scale players.<br>
+· <strong>Algo trading framework (April 2026):</strong> Mandatory registration and oversight of all algo strategies. This is an <strong>opportunity</strong> for Angel One — currently Zerodha dominates via Kite Connect. If SEBI mandates a level playing field for algo access, Angel One can launch its own API platform and capture algo traders.<br><br>
+<u>2. Strategic Positioning (3–12 months):</u><br>
+· <strong>"Qualified client" classification:</strong> If SEBI introduces tiered access (retail vs qualified vs professional), this changes the acquisition game. Marketing can no longer be "anyone can trade F&O." Angel One should:<br>
+  — Build a "Qualification Journey" in the app: education modules, risk assessment, simulated trading — users earn the "qualified" badge. This gamifies compliance and builds trust.<br>
+  — Position Angel One as the <strong>responsible broker</strong> — "We help you qualify, we don't just hand you leverage." This differentiates from aggressive discount brokers.<br>
+· <strong>DRA channel advantage:</strong> Angel One's DRA network can become the <strong>compliance distribution channel</strong>. Train DRAs on the new regulations. They become trusted advisors helping clients navigate qualification requirements. No other broker has this human-touch + digital combination.<br><br>
+<u>3. Product Roadmap Shifts:</u><br>
+· <strong>Algo Sandbox:</strong> Launch a regulated algo-testing environment within the Angel One platform. Users submit strategies, they're tested in a sandbox before going live. This builds trust with SEBI and attracts algo-curious traders.<br>
+· <strong>Qualification Dashboard:</strong> A real-time tracker showing users their qualification status, pending requirements, and next steps. Make compliance a UX feature, not a friction point.<br>
+· <strong>Education-first onboarding:</strong> Mandatory risk disclosure videos, simulated first trade, portfolio risk score. Position these as product features, not regulatory checkboxes.<br><br>
+<u>4. Competitive Impact:</u><br>
+· <strong>Winners:</strong> Large, well-capitalized brokers (Angel One, Groww, Zerodha) — can absorb compliance costs.<br>
+· <strong>Losers:</strong> Small brokers, sub-scale players, aggressive F&O-focused platforms — can't afford compliance or user qualification.<br>
+· <strong>Net effect:</strong> Market consolidation toward top 3–5 players. Angel One should prepare for consolidation opportunities — acquire smaller brokers' client books at a discount.<br><br>
+<u>Bottom line:</u> Turn regulatory burden into competitive advantage. Angel One's brand age (29+ years), compliance infrastructure, and DRA network make it uniquely positioned to lead the "responsible broking" era. While competitors see regulation as a cost, Angel One should see it as a barrier to entry that protects its position.</strong></div>
+<div class="insight-box"><strong>Interview Tip:</strong> Frame regulation as an opportunity, not a threat. The broker that embraces compliance and turns it into a customer-facing feature wins. Mention specific product ideas (Algo Sandbox, Qualification Dashboard) to show product thinking.</div>
+</div></div></div>
+
+</div></div></section>
+
+<!-- ═══════════════════════ 4. PRODUCT THINKING (5 Q&As) ═══════════════════════ -->
+<section id="product-thinking">
+<div class="section-header" data-section="product-thinking">
+<span class="section-num">Sec 4</span>
+<h2>Product &amp; Feature Thinking — With Sample Answers</h2>
+<span class="accordion-icon">+</span>
 </div>
-</section>
-<section id="product-thinking"><h2>Product &amp; Feature Thinking &mdash; With Sample Answers</h2>
+<div class="section-body"><div class="section-body-inner">
 <p class="section-desc">Product design and feature strategy questions focused on acquisition, activation, and retention.</p>
-<div class="card"><h3>Q1: Design a referral program for Upstox &mdash; under ₹30 CPA, SEBI-compliant, viral loop</h3>
+
+<!-- Q1 -->
+<div class="card" id="card-pq1">
+<div class="card-header" data-card="pq1"><h3>Q1: Design a referral program for Upstox — under ₹30 CPA, SEBI-compliant, viral loop</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="answer"><strong>Sample Answer:</strong><br><br>
 <strong>Let me design this in tiers:<br><br>
-<u>Tier 1 &mdash; User Referral (Viral):</u><br>
-&bull; Existing user refers a friend → both get ₹200 free brokerage credit (vested over 3 months of active trading)<br>
-&bull; CPA: ₹400/2 = ₹200 per referred client (but only if both activate) &mdash; effectively ₹50 if 75% drop off<br>
-&bull; SEBI compliance: Fixed reward, not revenue sharing. No promises about future earnings.<br>
-&bull; Viral loop: "Share and earn" button after every successful trade<br><br>
-<u>Tier 2 &mdash; Influencer Program:</u><br>
-&bull; Finance content creators with 5K+ followers get ₹200 per KYC + 5% of referred brokerage for 6 months<br>
-&bull; CPA: ₹200 + variable brokerage share (capped at ₹50/client)<br>
-&bull; Compliance: Fixed payout is disclosed. Variable share is documented as performance bonus.<br>
-&bull; Onboarding: Automated link generation, real-time dashboard<br><br>
+<u>Tier 1 — User Referral (Viral):</u><br>
+· Existing user refers a friend → both get ₹200 free brokerage credit (vested over 3 months of active trading)<br>
+· CPA: ₹400/2 = ₹200 per referred client (but only if both activate) — effectively ₹50 if 75% drop off<br>
+· SEBI compliance: Fixed reward, not revenue sharing. No promises about future earnings.<br>
+· Viral loop: "Share and earn" button after every successful trade<br><br>
+<u>Tier 2 — Influencer Program:</u><br>
+· Finance content creators with 5K+ followers get ₹200 per KYC + 5% of referred brokerage for 6 months<br>
+· CPA: ₹200 + variable brokerage share (capped at ₹50/client)<br>
+· Compliance: Fixed payout is disclosed. Variable share is documented as performance bonus.<br>
+· Onboarding: Automated link generation, real-time dashboard<br><br>
 <u>Why this works for Upstox:</u><br>
-&bull; Upstox has brand recognition (Ratan Tata backing) &mdash; influencers want association<br>
-&bull; ₹200 fixed + brokerage share beats most competitors on total earning potential<br>
-&bull; Viral loop through trading moments creates organic growth<br><br>
+· Upstox has brand recognition (Ratan Tata backing) — influencers want association<br>
+· ₹200 fixed + brokerage share beats most competitors on total earning potential<br>
+· Viral loop through trading moments creates organic growth<br><br>
 <u>Target economics:</u><br>
-&bull; Blended CPA: ₹150-200<br>
-&bull; Activation rate: 60%+<br>
-&bull; Break-even on client: Month 3-4 (vs industry avg 6-8 months)</strong></div>
-</div>
-<div class="card"><h3>Q2: Improve Zerodha's client onboarding funnel &mdash; currently drops 80%+ of users</h3>
+· Blended CPA: ₹150–200<br>
+· Activation rate: 60%+<br>
+· Break-even on client: Month 3–4 (vs industry avg 6–8 months)</strong></div>
+</div></div></div>
+
+<!-- Q2 -->
+<div class="card" id="card-pq2">
+<div class="card-header" data-card="pq2"><h3>Q2: Improve Zerodha's client onboarding funnel — currently drops 80%+ of users</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="answer"><strong>Sample Answer:</strong><br><br>
 <strong>Kite is best-in-class for existing traders. The problem is getting new users past the KYC-funding-first trade barrier. Here's the fix:<br><br>
-<strong>1. UPI auto-funding integration:</strong> Right after KYC approval, show a "Add funds" screen with UPI auto-pay. Don't make users switch apps. Pre-fill with ₹500 &mdash; one tap funding.<br>
-<strong>2. Guided first trade:</strong> A "First Trade" wizard that walks through buying 1 unit of NIFTYBEES (₹200-250). Real trade, real money, zero risk. Once they've done it once, they're 3x more likely to trade again.<br>
+<strong>1. UPI auto-funding integration:</strong> Right after KYC approval, show a "Add funds" screen with UPI auto-pay. Don't make users switch apps. Pre-fill with ₹500 — one tap funding.<br>
+<strong>2. Guided first trade:</strong> A "First Trade" wizard that walks through buying 1 unit of NIFTYBEES (₹200–250). Real trade, real money, zero risk. Once they've done it once, they're 3x more likely to trade again.<br>
 <strong>3. "Try before you buy" mode:</strong> Virtual ₹1L portfolio for 7 days. Users can practice trading without risk. After 7 days, prompt: "Ready to go live? Your ₹500 bonus is waiting."<br>
 <strong>4. In-app video KYC:</strong> Don't redirect to external site. Complete KYC start-to-finish in Kite app.<br>
-<strong>5. Referral frictional drop:</strong> If the user came via referral, pre-fill their first ₹500 deposit with the referrer's bonus &mdash; makes the connection tangible.<br><br>
+<strong>5. Referral frictional drop:</strong> If the user came via referral, pre-fill their first ₹500 deposit with the referrer's bonus — makes the connection tangible.<br><br>
 Expected impact: 80% → 50% drop (still high, but 3x more activated users without incremental acquisition spend, just product improvement).</strong></div>
-</div>
-<div class="card"><h3>Q3: Design a feature to reduce inactive users &mdash; 60% inactive within 6 months</h3>
+</div></div></div>
+
+<!-- Q3 -->
+<div class="card" id="card-pq3">
+<div class="card-header" data-card="pq3"><h3>Q3: Design a feature to reduce inactive users — 60% inactive within 6 months</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="answer"><strong>Sample Answer:</strong><br><br>
-<strong>60% inactive by 6 months means the product isn't integrating into users' financial lives. The fix isn't a single feature &mdash; it's a re-engagement system:<br><br>
+<strong>60% inactive by 6 months means the product isn't integrating into users' financial lives. The fix isn't a single feature — it's a re-engagement system:<br><br>
 <strong>Core Feature: "My Portfolio Health" Dashboard</strong><br>
-&bull; Shows: missed gains (if you'd invested ₹10K in Reliance 6 months ago...), dividend alerts, portfolio diversification score<br>
-&bull; If portfolio is below ₹1K: "Add ₹5,000 and you could earn ~₹200/month in dividends" &mdash; aspiration, not obligation<br><br>
+· Shows: missed gains (if you'd invested ₹10K in Reliance 6 months ago…), dividend alerts, portfolio diversification score<br>
+· If portfolio is below ₹1K: "Add ₹5,000 and you could earn ~₹200/month in dividends" — aspiration, not obligation<br><br>
 <strong>Trigger-Based Re-engagement (automated):</strong><br>
-&bull; Day 30 inactivity: Email &mdash; "Stock you watched (RELIANCE) is up 12%"<br>
-&bull; Day 60: SMS &mdash; "Your portfolio returned -2% this month → here's a suggested rebalance"<br>
-&bull; Day 90: WhatsApp &mdash; "₹500 free brokerage credit waiting. Unlock by placing one trade."<br><br>
+· Day 30 inactivity: Email — "Stock you watched (RELIANCE) is up 12%"<br>
+· Day 60: SMS — "Your portfolio returned −2% this month → here's a suggested rebalance"<br>
+· Day 90: WhatsApp — "₹500 free brokerage credit waiting. Unlock by placing one trade."<br><br>
 <strong>Dream Goal Tracker:</strong><br>
-&bull; User sets a goal: "I want ₹5L for my child's education in 5 years"<br>
-&bull; Kite shows: "You're ₹8,000 away from this month's target. Invest ₹2,000/month to stay on track."<br>
-&bull; Progress bar creates stickiness &mdash; humans hate losing progress<br><br>
+· User sets a goal: "I want ₹5L for my child's education in 5 years"<br>
+· Kite shows: "You're ₹8,000 away from this month's target. Invest ₹2,000/month to stay on track."<br>
+· Progress bar creates stickiness — humans hate losing progress<br><br>
 <strong>News-Based Nudge:</strong><br>
-&bull; "Reliance just announced a buyback. You can participate..." → creates urgency and action<br>
-&bull; Personalized: The system learns what stocks the user watches and creates relevant alerts<br><br>
+· "Reliance just announced a buyback. You can participate…" → creates urgency and action<br>
+· Personalized: The system learns what stocks the user watches and creates relevant alerts<br><br>
 Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: Significant from retained inactive users who start trading again.</strong></div>
+</div></div></div>
+
+<!-- Q4 (NEW) -->
+<div class="card" id="card-pq4">
+<div class="card-header" data-card="pq4"><h3>Q4: Design copy trading for Angel One</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Sample Answer:</strong><br><br>
+<strong>Copy trading is a powerful acquisition and retention tool. Dhan already has it. Groww and Zerodha don't. Angel One has a unique advantage — the DRA network can become the copy trading leader distribution channel. Here's the design:<br><br>
+<u>Product: "Angel Mirror"</u><br><br>
+<strong>1. Leader Discovery & Verification:</strong><br>
+· Verified leaders: SEBI-registered RAs, experienced traders with 2+ year track records, Angel One power users with top-quartile performance<br>
+· Transparent profiles: 1-year, 3-year CAGR, max drawdown, Sharpe ratio, win rate, average holding period<br>
+· Badge tiers: "Rising Star" (&lt;1yr track), "Consistent" (1–3yr), "Veteran" (3yr+)<br>
+· Risk tags: Conservative, Balanced, Aggressive — with volatility and max drawdown clearly displayed<br><br>
+<strong>2. Follower Experience:</strong><br>
+· Choose a leader → allocate amount (min ₹5,000) → choose copy mode (proportional or fixed lot)<br>
+· One-tap follow: See leader's portfolio, past trades, current positions → tap "Mirror"<br>
+· Auto-execute: Leader places a trade → follower's account replicates within 3 seconds<br>
+· Risk controls: Max allocation per trade (₹ or %), stop-loss on copy (auto-disconnect if drawdown &gt;X%), max leaders followed (5)<br>
+· Pause/Resume: Follower can pause copying at any time without closing positions<br><br>
+<strong>3. Leader Monetization:</strong><br>
+· Leaders earn 10–20% of the brokerage generated by their followers<br>
+· Tiered revenue share: 10% base, +5% if &gt;100 followers, +5% if &gt;500 followers<br>
+· SEBI compliance: Fixed % of brokerage (not profit-sharing — avoids PMS regulation). Disclosed transparently.<br>
+· Leader dashboard: Real-time follower count, AUM copied, monthly earnings, follower retention metrics<br><br>
+<strong>4. DRA Integration (Angel One's unique advantage):</strong><br>
+· DRAs can become copy trading ambassadors — "Become a Mirror Partner"<br>
+· DRA earns: ₹200 fixed per follower activation + 5% of follower brokerage for 12 months<br>
+· Training: Mirror Masterclass for DRAs — how to explain copy trading, identify good leaders, manage follower expectations<br>
+· This converts the DRA network from a volume-acquisition channel to a <strong>quality-retention channel</strong><br><br>
+<strong>5. Risk & Compliance:</strong><br>
+· Mandatory risk disclosure before first copy: "Past performance does not guarantee future returns" video + quiz<br>
+· Leader audit: Quarterly review of leaders — remove underperformers, add new ones<br>
+· Circuit breakers: If a leader's strategy deviates &gt;20% from stated style, auto-flag for review<br>
+· Client suitability: Copy trading disabled for users who haven't completed risk profiling<br><br>
+<u>Go-to-Market:</u><br>
+· Month 1: Onboard 20 verified leaders internally (Angel One top traders by invitation)<br>
+· Month 2: Soft launch to 10,000 existing active users<br>
+· Month 3: DRA launch — train top 200 DRAs, enable Mirror Partner program<br>
+· Month 4–6: Open to all users, scale leader onboarding<br><br>
+<u>Expected Impact:</u><br>
+· Copy trading users have 3x higher 6-month retention (industry benchmark)<br>
+· 5–8% of active clients adopt copy trading in Year 1<br>
+· Additional revenue: Copy trading brokerage + leader revenue share + higher engagement → cross-sell<br>
+· DRA network gets a new product to sell → increases DRA retention and activation</strong></div>
+<div class="insight-box"><strong>Why this answer wins:</strong> Connects copy trading directly to Angel One's unique DRA advantage. Shows product thinking (features, leader tiers, risk controls), business thinking (monetization, unit economics), and GTM strategy. Demonstrates understanding of SEBI compliance boundaries.</div>
+</div></div></div>
+
+<!-- Q5 (NEW) -->
+<div class="card" id="card-pq5">
+<div class="card-header" data-card="pq5"><h3>Q5: Redesign Angel One's brokerage pricing for 2026</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Sample Answer:</strong><br><br>
+<strong>Angel One's current pricing has a structural weakness: charging ₹20 or 0.1% for equity delivery when Zerodha and Dhan offer ₹0. In 2026, this gap is widening as Dhan grows. But zero brokerage across the board isn't the answer — it destroys revenue without guaranteeing market share. Here's a tiered redesign:<br><br>
+<u>New Pricing: "Angel One Freedom Plans"</u><br><br>
+<strong>Plan 1 — Basic (Free):</strong><br>
+· Equity Delivery: <strong>₹0 FREE</strong> (match Zerodha/Dhan)<br>
+· Equity Intraday: ₹20 or 0.03% (match Zerodha)<br>
+· F&O: ₹20/order<br>
+· MTF: 14.99%<br>
+· DP: ₹20 + GST<br>
+· Target: Mass retail, first-time investors. Gets Angel One competitive on the #1 pricing complaint.<br><br>
+<strong>Plan 2 — Pro (₹299/month):</strong><br>
+· Equity Delivery: ₹0<br>
+· Equity Intraday: ₹0 (up to ₹5L turnover/day)<br>
+· F&O: ₹10/order (50% off)<br>
+· MTF: 12.99% (competitive with Dhan)<br>
+· DP: ₹0 (waived)<br>
+· Bonus: Priority customer support, advanced charting, 1 free research call/month<br>
+· Target: Active traders, 5+ trades/month. Subscription revenue creates predictability.<br><br>
+<strong>Plan 3 — Elite (₹999/month):</strong><br>
+· All trading segments: ₹0 brokerage (unlimited)<br>
+· MTF: 11.99% (lowest in market)<br>
+· DP: ₹0<br>
+· Bonus: Dedicated RM, algo access, API key, co-branded credit card, invite to quarterly market outlook webinars<br>
+· Target: Power traders (50+ trades/month), algo traders, HNI.<br><br>
+<u>Why This Works:</u><br>
+· <strong>Fixes the pricing gap:</strong> Basic plan matches Zerodha/Dhan on delivery — removes the #1 objection.<br>
+· <strong>Subscription = sticky revenue:</strong> Monthly plans create predictable, recurring revenue. Reduces dependence on trading volume cycles.<br>
+· <strong>Anchoring effect:</strong> The existence of Pro/Elite plans makes Basic feel like great value. Users may upgrade to "save money" if their monthly brokerage exceeds the subscription cost.<br>
+· <strong>Differentiation:</strong> No major Indian broker has a pure subscription model. First-mover advantage in packaging.<br><br>
+<u>Financial Impact Model:</u><br>
+· Assume 7.58M active clients; 10% on Pro (₹299), 2% on Elite (₹999)<br>
+· Subscription revenue: (758K × ₹299 × 12) + (152K × ₹999 × 12) = ₹272 Cr + ₹182 Cr = <strong>₹454 Cr annual</strong><br>
+· Brokerage revenue loss from free delivery: estimated ₹80–120 Cr (delivery is ~15–20% of brokerage revenue)<br>
+· <strong>Net: +₹334–374 Cr incremental revenue</strong> (conservative)<br>
+· Additional benefit: 15–20% reduction in churn from subscription stickiness<br><br>
+<u>Risk Mitigation:</u><br>
+· Grandfather existing high-volume traders onto Pro/Elite for first 3 months free<br>
+· A/B test Basic plan in 2 states first (MH, GJ) before national rollout<br>
+· Monitor: conversion rate, ARPU shift, churn delta, competitor response<br><br>
+<u>Competitive Response Anticipation:</u><br>
+· Zerodha: Unlikely to match — their culture is all-you-can-eat flat fee. Subscription is philosophically different.<br>
+· Dhan: Already winning on price. Adding a subscription tier would be seen as backtracking.<br>
+· Groww: Might launch a similar tier. But Groww's audience is casual investors — subscription penetration would be lower.<br>
+· <strong>Angel One wins if:</strong> DRA network effectively communicates the value of Pro/Elite plans. The human channel is the advantage in selling subscription vs app-only competitors.</strong></div>
+</div></div></div>
+
+</div></div></section>
+
+<!-- ═══════════════════════ 5. BEHAVIORAL (8 Q&As) ═══════════════════════ -->
+<section id="behavioral">
+<div class="section-header" data-section="behavioral">
+<span class="section-num">Sec 5</span>
+<h2>Behavioral &amp; Experience Questions — With Sample Answers</h2>
+<span class="accordion-icon">+</span>
 </div>
-</section>
-<section id="behavioral"><h2>Behavioral &amp; Experience Questions &mdash; With Sample Answers</h2>
+<div class="section-body"><div class="section-body-inner">
 <p class="section-desc">STAR-format answers mapped to actual accomplishments. Practice telling these stories naturally.</p>
-<div class="card"><h3>Q1: Tell me about a time you made a data-driven decision that was unpopular</h3>
-<div class="answer"><strong>Situation:</strong> Angel One's DRA channel had 70,000+ registered DRAs, but deep analysis showed 90% of FYR came from just 10% of DRAs. The remaining 90% were cost centers &mdash; earning fixed payouts with near-zero client trading activity.
+
+<!-- BQ1 -->
+<div class="card" id="card-bq1">
+<div class="card-header" data-card="bq1"><h3>Q1: Tell me about a time you made a data-driven decision that was unpopular</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> Angel One's DRA channel had 70,000+ registered DRAs, but deep analysis showed 90% of FYR came from just 10% of DRAs. The remaining 90% were cost centers — earning fixed payouts with near-zero client trading activity.
 <br><br>
 <strong>Task:</strong> I needed to clean up the channel to improve unit economics. But terminating DRAs meant losing potential future volume.
 <br><br>
-<strong>Action:</strong> I ran a full-segment analysis (lifetime tier + current state + trend). Then systematically terminated inactive/low-quality DRAs, reducing the base from 70,000 to 2,400. I restructured payouts &mdash; quality-tier options instead of flat-rate for everyone. For volume DRAs earning ₹250/kyc with zero FYR, I moved them to a self-selection model: ₹100 + 45% brokerage (quality-aligned) or ₹250 + 35% (status quo).
+<strong>Action:</strong> I ran a full-segment analysis (lifetime tier + current state + trend). Then systematically terminated inactive/low-quality DRAs, reducing the base from 70,000 to 2,400. I restructured payouts — quality-tier options instead of flat-rate for everyone. For volume DRAs earning ₹250/kyc with zero FYR, I moved them to a self-selection model: ₹100 + 45% brokerage (quality-aligned) or ₹250 + 35% (status quo).
 <br><br>
 <strong>Result:</strong> Channel quality transformed. CPA dropped 52% (₹423 → ₹202). Activation improved from less than 1% to ~7%. The 2,400 remaining DRAs produced better quality clients than the 70,000 did before.</div>
-</div>
-<div class="card"><h3>Q2: Tell me about managing conflicting stakeholders (FDS vs Business)</h3>
+</div></div></div>
+
+<!-- BQ2 -->
+<div class="card" id="card-bq2">
+<div class="card-header" data-card="bq2"><h3>Q2: Tell me about managing conflicting stakeholders (FDS vs Business)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="answer"><strong>Situation:</strong> FDS (Fraud Detection & Surveillance) would send show-cause emails to DRAs for compliance violations. DRAs would respond/remediate, but FDS would terminate them anyway. The business team lost valuable contributors. CXO had to personally intervene for every save.
 <br><br>
 <strong>Task:</strong> Create a process that satisfies both FDS (compliance safety) and business (revenue retention).
@@ -426,42 +865,58 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <strong>Action:</strong> Mapped 7 specific process gaps. Designed a joint review workflow: FDS evaluates compliance → business evaluates revenue impact → joint decision. Added case closure confirmation for DRAs, offense counter reset after remediation, and clear escalation criteria (only top-tier DRAs go to CXO). Standardized email templates with specific violations so DRAs knew exactly what to fix.
 <br><br>
 <strong>Result:</strong> Process adopted. FDS no longer overrides remediated cases. Business has a formal seat at the table. CXO involvement reduced by ~70%.</div>
-</div>
-<div class="card"><h3>Q3: How did you achieve a stretch target with limited resources?</h3>
-<div class="answer"><strong>Situation:</strong> The RM team was reduced from 7 to 3 people (budget cuts), while the DRA channel needed more attention &mdash; onboarding, top DRA engagement, dormant reactivation.
+</div></div></div>
+
+<!-- BQ3 -->
+<div class="card" id="card-bq3">
+<div class="card-header" data-card="bq3"><h3>Q3: How did you achieve a stretch target with limited resources?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> The RM team was reduced from 7 to 3 people (budget cuts), while the DRA channel needed more attention — onboarding, top DRA engagement, dormant reactivation.
 <br><br>
 <strong>Task:</strong> Achieve better channel outcomes with less than half the RM headcount.
 <br><br>
 <strong>Action:</strong> Built structured systems to multiply RM productivity:
-&bull; <strong>DRA Pulse Programme</strong> &mdash; Weekly strategic syncs with top performers only. Created direct feedback loop.
-&bull; <strong>Activation webinars</strong> &mdash; Instead of 1:1 calls for every new DRA, ran group webinars. Core content: how brokerage sharing works, earnings simulation. Scaled 1 RM → 50 DRAs per session.
-&bull; <strong>Re-engagement campaigns</strong> &mdash; Automated dormant DRA outreach (WhatsApp at Day 15, call at Day 30) so RMs only engaged warm leads.
-&bull; <strong>Categorized DRA list</strong> &mdash; Top 53 → monthly; 300+ offer DRAs → bi-weekly; new DRAs → weekly. Clear cadence for each tier.
+· <strong>DRA Pulse Programme</strong> — Weekly strategic syncs with top performers only. Created direct feedback loop.
+· <strong>Activation webinars</strong> — Instead of 1:1 calls for every new DRA, ran group webinars. Core content: how brokerage sharing works, earnings simulation. Scaled 1 RM → 50 DRAs per session.
+· <strong>Re-engagement campaigns</strong> — Automated dormant DRA outreach (WhatsApp at Day 15, call at Day 30) so RMs only engaged warm leads.
+· <strong>Categorized DRA list</strong> — Top 53 → monthly; 300+ offer DRAs → bi-weekly; new DRAs → weekly. Clear cadence for each tier.
 <br><br>
-<strong>Result:</strong> Activation increased from less than 1% to ~7%. Top DRAs engaged more consistently. 3 RMs achieved what 7 couldn't &mdash; because the process was systematized.</div>
-</div>
-<div class="card"><h3>Q4: Tell me about a time you found a problem nobody was looking at</h3>
-<div class="answer"><strong>Situation:</strong> While analyzing DRA operations, I discovered that DRAs had direct access to client PII &mdash; PAN numbers and mobile numbers. This was a massive compliance and reputational risk. No one had flagged it.
+<strong>Result:</strong> Activation increased from less than 1% to ~7%. Top DRAs engaged more consistently. 3 RMs achieved what 7 couldn't — because the process was systematized.</div>
+</div></div></div>
+
+<!-- BQ4 -->
+<div class="card" id="card-bq4">
+<div class="card-header" data-card="bq4"><h3>Q4: Tell me about a time you found a problem nobody was looking at</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> While analyzing DRA operations, I discovered that DRAs had direct access to client PII — PAN numbers and mobile numbers. This was a massive compliance and reputational risk. No one had flagged it.
 <br><br>
 <strong>Task:</strong> Eliminate client data exposure immediately.
 <br><br>
-<strong>Action:</strong> Worked with engineering to revoke DRA system access to PAN and mobile fields. Implemented 100% mask &mdash; DRAs could still see KYC counts and client codes but not personal information. Audited all existing systems to ensure no backdoor access remained.
+<strong>Action:</strong> Worked with engineering to revoke DRA system access to PAN and mobile fields. Implemented 100% mask — DRAs could still see KYC counts and client codes but not personal information. Audited all existing systems to ensure no backdoor access remained.
 <br><br>
 <strong>Result:</strong> Achieved 100% data privacy compliance. Risk of unauthorized DRA-to-client contact eliminated. This was later used as a case study for internal data security practices.</div>
-</div>
-<div class="card"><h3>Q5: Tell me about a strategic decision that failed and what you learned</h3>
-<div class="answer"><strong>Situation:</strong> Volume DRAs (100+ KYCs/month) were on ₹250 fixed per KYC + 35% brokerage sharing. They were our highest-volume producers. But their clients had near-zero FYR &mdash; they were bringing dead accounts via affiliate links on WhatsApp/Telegram.
+</div></div></div>
+
+<!-- BQ5 -->
+<div class="card" id="card-bq5">
+<div class="card-header" data-card="bq5"><h3>Q5: Tell me about a strategic decision that failed and what you learned</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> Volume DRAs (100+ KYCs/month) were on ₹250 fixed per KYC + 35% brokerage sharing. They were our highest-volume producers. But their clients had near-zero FYR — they were bringing dead accounts via affiliate links on WhatsApp/Telegram.
 <br><br>
 <strong>Task:</strong> Convert volume to quality without losing them.
 <br><br>
-<strong>What I tried (that partially failed):</strong> I restructured their payouts &mdash; reduced fixed to ₹200 with quality bonus for client activation. The volume DRAs stopped producing. Volume dropped 40% in one month.
+<strong>What I tried (that partially failed):</strong> I restructured their payouts — reduced fixed to ₹200 with quality bonus for client activation. The volume DRAs stopped producing. Volume dropped 40% in one month.
 <br><br>
-<strong>What I learned:</strong> Volume DRAs had a business model &mdash; post affiliate links → earn per KYC. They weren't interested in quality because their audience was volume-based. Cutting their payout didn't change behavior, it killed the channel.
+<strong>What I learned:</strong> Volume DRAs had a business model — post affiliate links → earn per KYC. They weren't interested in quality because their audience was volume-based. Cutting their payout didn't change behavior, it killed the channel.
 <br><br>
-<strong>Pivot:</strong> Switched to self-selection &mdash; let DRAs choose their own payout structure. Offered ₹100 + 45% (quality path) or ₹250 + 35% (volume path). Those who chose quality started delivering better clients. Those who chose volume continued but at least now the cost was justified. The lesson: don't force change, let partners opt-in to better structures.</div>
-</div>
-<div class="card"><h3>Q6: How do you think about competitive positioning?</h3>
-<div class="answer"><strong>Situation:</strong> Angel One's DRA payout (₹100-400 + 35%) was significantly lower than competitors (Upstox ₹600+40%, Dhan 65%, Samco ₹700+90%). DRAs were leaving for better offers.
+<strong>Pivot:</strong> Switched to self-selection — let DRAs choose their own payout structure. Offered ₹100 + 45% (quality path) or ₹250 + 35% (volume path). Those who chose quality started delivering better clients. Those who chose volume continued but at least now the cost was justified. The lesson: don't force change, let partners opt-in to better structures.</div>
+</div></div></div>
+
+<!-- BQ6 -->
+<div class="card" id="card-bq6">
+<div class="card-header" data-card="bq6"><h3>Q6: How do you think about competitive positioning?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> Angel One's DRA payout (₹100–400 + 35%) was significantly lower than competitors (Upstox ₹600+40%, Dhan 65%, Samco ₹700+90%). DRAs were leaving for better offers.
 <br><br>
 <strong>Task:</strong> Position Angel One to win on non-price factors.
 <br><br>
@@ -472,54 +927,505 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 4. <strong>Targeted offers:</strong> Instead of blanket increases, gave higher offers only to proven performance tiers. 23 DRAs on 300+ offer, top performers on ₹400 + 45%.
 <br><br>
 <strong>Result:</strong> Retained top performers despite lower headline payouts. Discovery: most DRAs optimize for total income, not per-unit payout. If their clients earn more at Angel One (better brokerage), their share is higher. Sold the value of the ecosystem, not the upfront payment.</div>
-</div>
-<div class="card"><h3>Q7: What's your approach to building something from zero?</h3>
+</div></div></div>
+
+<!-- BQ7 -->
+<div class="card" id="card-bq7">
+<div class="card-header" data-card="bq7"><h3>Q7: What's your approach to building something from zero?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
 <div class="answer"><strong>Situation:</strong> Angel One's DRA channel relied entirely on organic listing. No agency model, no performance marketing, no self-serve registration. I needed to create new acquisition engines.
 <br><br>
 <strong>Approach:</strong>
-1. <strong>Agency Model:</strong> Partnered with 5 specialized agencies that already had DRA networks. Gave them batch onboarding, centralized tracking, and bulk payout mechanisms. These agencies brought pre-qualified DRAs &mdash; higher activation from day one.
+1. <strong>Agency Model:</strong> Partnered with 5 specialized agencies that already had DRA networks. Gave them batch onboarding, centralized tracking, and bulk payout mechanisms. These agencies brought pre-qualified DRAs — higher activation from day one.
 2. <strong>Performance Marketing (UAC + Meta):</strong> Launched Google UAC campaigns targeting "become a DRA" and "referral partner" keywords. Meta campaigns targeted finance-content followers. Key learning: these channels work for top-of-funnel awareness but CPA is higher than organic.
-3. <strong>Website Self-Registration:</strong> New "Become a DRA" page with pre-qualification form &mdash; social media handles, expected volume, content style. Auto-route high-quality leads to RM for fast onboarding.
+3. <strong>Website Self-Registration:</strong> New "Become a DRA" page with pre-qualification form — social media handles, expected volume, content style. Auto-route high-quality leads to RM for fast onboarding.
 <br><br>
 <strong>Result:</strong> 3 new channels live within 3 months. Agency model scaling fastest. Self-serve registration capturing low-volume but high-intent partners. Performance marketing still optimizing for CPA.</div>
+</div></div></div>
+
+<!-- BQ8 (NEW) -->
+<div class="card" id="card-bq8">
+<div class="card-header" data-card="bq8"><h3>Q8: Tell me about a time you navigated a regulatory or compliance change that impacted your business</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="answer"><strong>Situation:</strong> In August 2024, SEBI issued a circular tightening rules around client acquisition incentives for stock brokers — specifically targeting revenue-sharing models that could be misconstrued as commission-based advice. Angel One's DRA brokerage-sharing model (35% of brokerage revenue) fell into a grey area that needed immediate clarification.
+<br><br>
+<strong>Task:</strong> Redesign DRA payout structures to be fully SEBI-compliant while preserving the economic attractiveness of the channel. Could not afford to lose top-performing DRAs during the transition.
+<br><br>
+<strong>Action:</strong>
+<strong>1. Regulatory Deep-Dive:</strong> Spent 2 weeks with legal and compliance teams parsing every clause of the circular. Identified exactly what was prohibited (revenue-share as % of client AUM, performance-linked payouts that resemble advisory fees) vs what was permitted (fixed payouts, marketing fees, referral bonuses for verified KYC completion).
+<strong>2. Payout Restructuring:</strong> Transitioned from pure brokerage-sharing (35%) to a hybrid model:
+  — Fixed component: ₹100–400 per KYC (tiered by DRA quality tier)
+  — Variable component: 35% brokerage sharing documented as "marketing incentive" (not advisory fee), with clear disclosure to DRAs and clients
+  — Added: Quarterly performance bonus based on client activation and retention (not trading volume — compliance-safe metric)
+<strong>3. DRA Communication:</strong> Created a 3-part communication strategy:
+  — Pre-announcement: "Exciting changes coming to your payout structure" — framed positively
+  — Educational webinar: Walked through the "why" — SEBI regulations protect everyone, new structure is more transparent and sustainable
+  — 1:1 calls with top 50 DRAs: Addressed individual concerns, showed them the math proving their earnings wouldn't decrease
+<strong>4. Tech Implementation:</strong> Worked with engineering to update the NXT dashboard — new payout tracker separated fixed from variable, showed compliance status, generated SEBI-compliant payout statements.
+<br><br>
+<strong>Result:</strong>
+· Zero DRA attrition among top performers during transition
+· Channel CPA improved 8% (because the new structure reduced payouts on low-quality KYCs)
+· SEBI compliance audit passed with zero observations in the next quarter
+· The transparent payout breakdown in NXT dashboard became a recruitment tool — "See exactly what you'll earn, fully compliant, fully transparent"
+· <strong>Learning:</strong> Regulatory changes, when handled proactively, can become competitive advantages. While competitors scrambled, we turned compliance into a trust-building feature.</div>
+<div class="insight-box"><strong>Why this answer:</strong> Shows regulatory awareness (SEBI Aug 2024 circular), stakeholder management (legal, compliance, DRAs, engineering), communication skills, and ability to turn a threat into an advantage. The specific detail — zero observations in next audit — is the kind of concrete result interviewers love.</div>
+</div></div></div>
+
+</div></div></section>
+
+<!-- ═══════════════════════ 6. MARKET Q&A (15 Q&As) ═══════════════════════ -->
+<section id="market">
+<div class="section-header" data-section="market">
+<span class="section-num">Sec 6</span>
+<h2>Market &amp; Industry Q&amp;A — 15 Questions</h2>
+<span class="accordion-icon">+</span>
 </div>
-</section>
-<section id="market"><h2>Market &amp; Industry Q&amp;A</h2>
-<p class="section-desc">Quick-fire questions testing your understanding of the Indian broking landscape.</p>
-<div class="card"><h3>What is the biggest threat to discount brokers today?</h3>
-<div class="answer">F&O regulatory tightening (38% volume contraction). Discount brokers earn disproportionately from F&O volumes. SEBI's measures to reduce retail participation in derivatives directly impact revenue models. The pivot to AUM-based revenue (delivery, MF, wealth) will determine who survives the next 12-18 months.</div>
+<div class="section-body"><div class="section-body-inner">
+<p class="section-desc">Quick-fire questions testing your understanding of the Indian broking landscape. Use these to warm up before interviews.</p>
+
+<!-- Q1-6 original -->
+<div class="card" id="card-mq1"><div class="card-header" data-card="mq1"><h3>Q1: What is the biggest threat to discount brokers today?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">F&O regulatory tightening (38% volume contraction). Discount brokers earn disproportionately from F&O volumes. SEBI's measures to reduce retail participation in derivatives directly impact revenue models. The pivot to AUM-based revenue (delivery, MF, wealth) will determine who survives the next 12–18 months.</div></div></div></div>
+
+<div class="card" id="card-mq2"><div class="card-header" data-card="mq2"><h3>Q2: How does Groww's IPO change the competitive landscape?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Groww now has ~₹3,500 Cr from the IPO to invest in brand building, MTF, NBFC, and tech. Combined with 26% market share and 83% organic acquisition, they can afford to not compete on price. Their DRHP revealed 77.7% 3-year retention — they're sticky. Competition just got a well-funded, already-dominant player.</div></div></div></div>
+
+<div class="card" id="card-mq3"><div class="card-header" data-card="mq3"><h3>Q3: Why is Dhan growing faster than Zerodha despite being 10 years younger?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Dhan entered with a clean slate — no legacy systems, aggressive pricing (12.49% MTF, ₹0 delivery, ₹0 lifetime AMC), modern tech (free TradingView, Fuzz AI, copy trading). Zerodha is managing a declining base because they haven't innovated on acquisition. Dhan is eating Zerodha's lunch on pricing and tech maturity.</div></div></div></div>
+
+<div class="card" id="card-mq4"><div class="card-header" data-card="mq4"><h3>Q4: Will a partner/referral channel work for Zerodha?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Yes, if positioned correctly. Zerodha's brand trust means partners would accept lower payouts for the association. The challenge: Zerodha's culture has always been product-led, not sales-led. Building a partner channel would require organizational change. But if they do it right, they could capture the mid-tier influencer market that Angel One currently owns.</div></div></div></div>
+
+<div class="card" id="card-mq5"><div class="card-header" data-card="mq5"><h3>Q5: Which product feature would have the biggest impact on reducing churn?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">A personalized portfolio tracker with goal-based investing. The #1 reason users churn is they don't see their money growing and lose interest. If you show them a goal (retirement, education, vacation) with a progress bar and automated SIP suggestions, they stay invested. Robinhood proved this — users with goals have 3x higher retention.</div></div></div></div>
+
+<div class="card" id="card-mq6"><div class="card-header" data-card="mq6"><h3>Q6: What would you do differently if you were leading growth at Upstox today?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Upstox has brand recognition (Ratan Tata) but hasn't converted it to acquisition leadership. I'd launch a referral program (₹200/referred + brokerage share), reactivate their dormant user base (estimated 2–3M inactive accounts), and double down on MTF with competitive pricing. Their current MTF rate of ~18.25% is the highest in the market — bringing it to 14% would unlock significant volume.</div></div></div></div>
+
+<!-- Q7-15 NEW -->
+<div class="card" id="card-mq7"><div class="card-header" data-card="mq7"><h3>Q7: What's the impact of SEBI's algo trading framework (April 2026)?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">SEBI's mandatory algo trading framework, effective April 1, 2026, requires all algorithmic orders to be tagged, registered, and subject to exchange oversight. Key impacts:<br><br>
+<strong>Short-term (2026):</strong> Compliance cost increases for brokers. Algo traders face registration friction — some may reduce activity. This temporarily impacts F&O volumes (already down 38%). Brokers without API infrastructure (Angel One, Groww) need to build it urgently.<br><br>
+<strong>Medium-term (2026–27):</strong> The framework legitimizes algo trading. Retail interest in algos grows. The broker with the best "algo marketplace" wins. Zerodha (Kite Connect) and Dhan (DhanHQ) have head starts. Angel One needs a strategic API play.<br><br>
+<strong>Long-term:</strong> Algo trading becomes democratized, like US markets. The framework removes the regulatory uncertainty that kept institutional algo traders away. Volumes recover and grow beyond pre-tightening levels.<br><br>
+<strong>Strategy implication:</strong> This is a "build or partner" moment. Building an API platform takes 12–18 months. Partnering (e.g., with TradingView, Streak, or an existing algo platform) is faster. Angel One should partner while building in parallel.</div></div></div></div>
+
+<div class="card" id="card-mq8"><div class="card-header" data-card="mq8"><h3>Q8: How does GIFT City / US stocks expansion change the game?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">In 2025–26, the top 4 Indian brokers received approval to offer US stocks via GIFT City's International Financial Services Centre (IFSC). This is a significant market expansion:<br><br>
+<strong>Current state:</strong> Only Groww offers US stocks (via Vested partnership). Other brokers lack the capability. Indian retail demand for US stocks (Apple, Tesla, NVIDIA, Microsoft) is high but supply-constrained.<br><br>
+<strong>GIFT City advantage:</strong> US stocks via GIFT IFSC avoid the LRS (Liberalised Remittance Scheme) limits and TCS complications of direct overseas investing. This makes US stock investing simpler and cheaper for Indian retail.<br><br>
+<strong>Competitive dynamics:</strong> The first 4 brokers with GIFT City US stock access (likely Groww, Zerodha, Angel One, and one more) will dominate this segment. US stocks are a premium product with higher margins than Indian delivery trading. It's also a retention tool — users with international portfolios are stickier.<br><br>
+<strong>Angel One's play:</strong> Getting GIFT City approval should be a top priority. Missing out means losing premium clients to Groww/Zerodha. If approved, bundle US stocks with research and create an "International Investor" tier.</div></div></div></div>
+
+<div class="card" id="card-mq9"><div class="card-header" data-card="mq9"><h3>Q9: What's the real significance of Dhan's rise?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Dhan's rise from a 2021 startup to a unicorn with 46.5% PAT margins isn't just another competitor — it's a signal that the Indian broking market is entering a new phase:<br><br>
+<strong>1. Tech is the new moat:</strong> Dhan proved that superior tech (TradingView, Fuzz AI, free APIs) can overcome brand and scale disadvantages. The next generation of investors values tech UX more than brand legacy.<br><br>
+<strong>2. Pricing is commoditized:</strong> Dhan set the floor — ₹0 delivery, 12.49% MTF, ₹0 lifetime AMC. Competitors can't differentiate on price anymore. The battle shifts to features, AI, and ecosystem.<br><br>
+<strong>3. Speed matters:</strong> Dhan launched copy trading, Fuzz AI, and free APIs in rapid succession while incumbents debated. Speed of execution is now a competitive advantage.<br><br>
+<strong>4. Market share is up for grabs:</strong> Zerodha lost ~11L active clients. Dhan gained. The "Zerodha is invincible" narrative is broken. The top 5 broking order is fluid.<br><br>
+<strong>5. Profitability ≠ scale:</strong> Dhan achieved 46.5% margin on ₹877 Cr revenue. This proves a lean, tech-first discount broker can be both fast-growing AND highly profitable. The old tradeoff (growth vs profit) doesn't apply when your cost structure is tech-leveraged.</div></div></div></div>
+
+<div class="card" id="card-mq10"><div class="card-header" data-card="mq10"><h3>Q10: Where is US stock investing headed for Indian brokers?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">US stock investing in India is at an inflection point. Key dynamics:<br><br>
+<strong>Demand side:</strong> Indian retail investors increasingly want exposure to global tech giants (Magnificent 7) and US ETFs. Awareness has grown through social media, finfluencers, and the visible outperformance of US tech stocks.<br><br>
+<strong>Supply side:</strong> Currently fragmented — Groww via Vested, a few standalone platforms (INDmoney, Vested Finance), and now GIFT City approvals. No seamless, single-app experience for US stocks.<br><br>
+<strong>GIFT City vs LRS route:</strong> GIFT City makes US investing frictionless — no TCS, no LRS limit tracking, no complex forex documentation. This will unlock mass adoption. The broker that integrates US stocks natively into their app (not as a separate "international" section) will win.<br><br>
+<strong>Revenue potential:</strong> US stock brokerage is 2–3x Indian delivery brokerage on a per-trade basis. Plus, forex spread adds revenue. A $100 trade in Apple generates more revenue than a ₹7,500 trade in Reliance.<br><br>
+<strong>Competitive prediction:</strong> By end-2027, 3–4 brokers will offer integrated US stocks via GIFT City. The winners will be those who make it feel like part of the same app, not a bolted-on feature.</div></div></div></div>
+
+<div class="card" id="card-mq11"><div class="card-header" data-card="mq11"><h3>Q11: Where do bank-led brokers fit? (ICICI Direct, HDFC Sec, Kotak)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Bank-led brokers (ICICI Direct, HDFC Securities, Kotak Securities, Axis Securities) occupy a different segment but are NOT irrelevant. Here's their position:<br><br>
+<strong>Advantages:</strong><br>
+· 3-in-1 accounts (banking + demat + trading) are seamless — funds move instantly, no UPI friction<br>
+· Trust: The bank brand (HDFC, ICICI, Kotak) is stronger than any standalone broker for conservative investors<br>
+· Cross-sell: Banks can acquire trading clients at near-zero cost from their banking customer base (HDFC Bank has 70M+ customers, ICICI 50M+)<br>
+· Sticky: Closing a 3-in-1 account means closing your bank account. That's massive switching friction.<br><br>
+<strong>Disadvantages:</strong><br>
+· Higher brokerage: Bank brokers charge 0.25–0.50% for delivery vs ₹0 from Zerodha/Dhan<br>
+· Poor UX: Bank broker apps are universally worse than Kite/Groww/Dhan<br>
+· Digital-first share is 76–78% and growing — bank brokers are losing the next generation<br>
+· Bank brokers' revenue CAGR: ~23% vs digital-first ~60%<br><br>
+<strong>Niche survival:</strong> Bank-led brokers will retain the "conservative first-time investor" and the "my father's broker" segments. They won't win the growth game but they won't disappear. Think of them as the full-service segment's digital extension.<br><br>
+<strong>Competitive threat level:</strong> Low for discount brokers. The revenue models and customer segments barely overlap. Discount brokers win on price and UX; bank-led brokers win on trust and convenience. The battleground is for new-to-market investors — and digital-first is winning that 85% of the time.</div></div></div></div>
+
+<div class="card" id="card-mq12"><div class="card-header" data-card="mq12"><h3>Q12: Is the F&O crackdown permanent or cyclical?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">The SEBI F&O tightening is <strong>structurally permanent</strong>, not cyclically temporary. Here's why:<br><br>
+<strong>Why permanent:</strong><br>
+· SEBI's language in circulars is unambiguous: "True to Label," higher lot sizes, mandatory risk disclosures, restricted weekly expiries — these are structural, not temporary measures<br>
+· The regulator's motivation is genuine: 9 out of 10 individual F&O traders lose money. This is a consumer protection mandate, not a market-cooling measure<br>
+· The Jan 2026 Stock Broker Regulations overhaul reinforces this — it's part of a broader regulatory architecture shift<br><br>
+<strong>Why volumes won't fully recover:</strong><br>
+· Pre-tightening, F&O was being used as a speculative lottery by retail. That model is being dismantled<br>
+· Higher barriers (lot sizes, margin requirements) permanently filter out casual speculators<br>
+· The remaining F&O traders will be more sophisticated, fewer in number, but higher quality<br><br>
+<strong>What this means for brokers:</strong><br>
+· F&O brokerage revenue will not return to pre-2024 levels<br>
+· Revenue diversification is existential, not optional<br>
+· Brokers must build delivery, MTF, MF, wealth, and international revenue lines<br>
+· The "F&O volume game" is over. The "AUM and client lifetime value game" has begun.<br><br>
+<strong>Counterpoint:</strong> Derivatives serve a real economic purpose (hedging). As markets mature, sophisticated derivatives usage will grow. But retail speculative F&O volumes — the driver of discount broker revenue — is permanently impaired.</div></div></div></div>
+
+<div class="card" id="card-mq13"><div class="card-header" data-card="mq13"><h3>Q13: What role will AI play in Indian broking over the next 3 years?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">AI in Indian broking is moving from "nice to have" to "competitive necessity." Over the next 3 years (2026–2029), here's how it plays out:<br><br>
+<strong>Phase 1 — AI Assistants (2026, happening now):</strong><br>
+· Dhan's Fuzz AI leads: natural-language portfolio queries, trade explanations, market summaries<br>
+· Every major broker will launch an AI assistant by end-2027. The early mover advantage is real but not insurmountable.<br>
+· Use cases: "Show me stocks with P/E &lt;15 and dividend yield &gt;3%" → AI returns filtered list. "Why did Reliance fall 2% today?" → AI explains.<br><br>
+<strong>Phase 2 — AI-Powered Advisory (2027–28):</strong><br>
+· SEBI will eventually regulate AI advisory. Expect an "AI Advisor Registration" category by 2028.<br>
+· Personalized portfolio recommendations, tax-loss harvesting, rebalancing alerts — all AI-driven.<br>
+· This blurs the line between discount broker and wealth manager. Brokers with AI advisory can charge premium fees.<br><br>
+<strong>Phase 3 — Autonomous Finance (2028–29):</strong><br>
+· AI-managed portfolios: "I want 12% CAGR with max 15% drawdown over 5 years." AI constructs and manages the portfolio.<br>
+· AI compliance: Real-time trade surveillance, fraud detection, suspicious pattern identification — reduces FDS team costs by 50%+.<br>
+· AI acquisition: Personalized onboarding, AI-driven customer support (80%+ queries handled without human intervention).<br><br>
+<strong>Competitive impact:</strong><br>
+· <strong>Winners:</strong> Brokers who treat AI as a core platform investment (Zerodha, Dhan, Groww).<br>
+· <strong>At risk:</strong> Brokers who treat AI as a chatbot feature.<br>
+· <strong>Differentiator:</strong> The quality of AI (accuracy, personalization, trust) becomes a brand differentiator. "Angel One's AI gave me a bad recommendation" is a PR risk. "Dhan's AI saved me 2% in taxes" is a moat.<br>
+· <strong>Cost play:</strong> AI can reduce per-client service cost by 60–70%, fundamentally improving unit economics for discount brokers.</div></div></div></div>
+
+<div class="card" id="card-mq14"><div class="card-header" data-card="mq14"><h3>Q14: How do you value a discount broker in 2026?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer">Discount broker valuation in 2026 requires a nuanced framework because the revenue mix is shifting from F&O (volatile) to AUM-based (stable). Here's the framework:<br><br>
+<strong>Traditional metrics (less relevant now):</strong><br>
+· Active client count — important but declining relevance as quality &gt; quantity<br>
+· Trading volume / ADTO — F&O contraction makes this a misleading metric<br><br>
+<strong>Modern valuation framework:</strong><br>
+<strong>1. Revenue Quality Score (1–10):</strong><br>
+· % revenue from recurring sources (AMC, subscription, float income) vs transaction-based<br>
+· Groww scores high (cross-sell, MF AUM). Dhan scores lower (transaction-heavy). Angel One in between.<br>
+· Higher recurring = higher valuation multiple<br><br>
+<strong>2. Client Lifetime Value (LTV) / CAC:</strong><br>
+· LTV = (Avg annual revenue per client × avg retention years) − cost to serve<br>
+· CAC = blended acquisition cost across all channels<br>
+· Benchmark: LTV/CAC &gt;5x is excellent. Groww's 77.7% 3-year retention = ~7–8 year avg lifetime → LTV/CAC likely 8–10x<br><br>
+<strong>3. Revenue per Active Client (RPAC):</strong><br>
+· Groww: ~₹302/yr (₹3,901 Cr / 12.92M)<br>
+· Angel One: ~₹691/yr (₹5,238 Cr / 7.58M) — higher RPAC but lower client count<br>
+· Motilal Oswal: ~₹8,256/yr — full-service premium. Different segment.<br><br>
+<strong>4. Margin Structure:</strong><br>
+· PAT margin: Groww 44.9%, Dhan 46.5%, Angel One 22.3%. Higher margin = higher multiple.<br>
+· Contribution margin: Groww 85.4% vs Angel One 46.4% — Groww's tech-leveraged model is more scalable.<br><br>
+<strong>5. Growth Rate (NSE client CAGR + revenue CAGR):</strong><br>
+· Groww: 41.7% client CAGR, ~77% revenue CAGR (FY23–25) → premium multiple<br>
+· Zerodha: Negative client growth → multiple compression<br>
+· Angel One: Modest growth → middle-of-the-pack multiple<br><br>
+<strong>Rough valuation ranges (enterprise value / revenue):</strong><br>
+· Groww: 15–20x revenue (listed, high growth, high margin, market leader)<br>
+· Zerodha: 8–12x revenue (private, flat growth, declining clients, highest profitability)<br>
+· Angel One: 4–6x revenue (listed, moderate growth, margin pressure)<br>
+· Dhan: 12–18x revenue (private, high growth, high margin, small base)<br><br>
+<strong>Key insight for interview:</strong> The broker that first cracks the subscription/annuity revenue model will get a valuation re-rating. Recurring revenue is valued at 3–5x the multiple of transaction revenue in financial services.</div></div></div></div>
+
+<div class="card" id="card-mq15"><div class="card-header" data-card="mq15"><h3>Q15: Which broker would you bet on for the next 5 years?</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner"><div class="answer"><strong>My bet: Groww for market leadership, Dhan for innovation-driven growth, Angel One for channel differentiation.</strong><br><br>
+<strong>Groww — The Safe Bet (Market Leader):</strong><br>
+· 28.2% NSE share and growing. 83% organic acquisition = sustainable moat. Not dependent on paid channels.<br>
+· 77.7% 3-year retention + 53.3% multi-product usage = compounding revenue per user.<br>
+· ₹3,500 Cr IPO war chest + listed currency for M&A. Can buy growth if organic slows.<br>
+· Risk: Regulatory overhang (too big to fail but also too big to escape regulation). Brand risk from product failures.<br><br>
+<strong>Dhan — The High-Risk, High-Reward Bet:</strong><br>
+· Best-in-class tech (TradingView, Fuzz AI, DhanHQ, copy trading). Attracting the most valuable segment — active traders.<br>
+· 46.5% PAT margin proves the model works at scale. If they 10x revenue, PAT could exceed Groww's at similar scale.<br>
+· Risk: Small base. Client quality risk (copy trading attracts speculators). Founder dependency. Regulatory risk on AI advisory.<br><br>
+<strong>Angel One — The Defensible Moat Bet:</strong><br>
+· DRA channel is a genuine, hard-to-replicate moat. No competitor has anything comparable at scale.<br>
+· 29+ year brand + listed transparency = institutional trust.<br>
+· CPA optimization (₹423 → ₹202) and activation improvement (&lt;1% → 7%) prove execution capability.<br>
+· Risk: Delivery pricing disadvantage. Slower tech innovation. Dependence on DRA channel for acquisition.<br><br>
+<strong>Zerodha — The Wildcard:</strong><br>
+· If they launch a referral program, subscription tier, and AI — they could rebound. But the current trajectory (declining clients, no innovation) is concerning.<br>
+· Their moat (Kite, Varsity, Kite Connect) is real but eroding as competitors catch up on UX.<br><br>
+<strong>Final answer:</strong> If I have to pick one — <strong>Groww</strong>. They have the flywheel: #1 market share → more data → better product → more organic growth → higher retention → higher LTV → more capital to invest → #1 market share. That's a hard flywheel to break.</div></div></div></div>
+
+</div></div></section>
+
+<!-- ═══════════════════════ 7. INDUSTRY TRENDS & DEVELOPMENTS ═══════════════════════ -->
+<section id="trends">
+<div class="section-header" data-section="trends">
+<span class="section-num">Sec 7</span>
+<h2>Industry Trends &amp; Developments</h2>
+<span class="accordion-icon">+</span>
 </div>
-<div class="card"><h3>How does Groww's IPO change the competitive landscape?</h3>
-<div class="answer">Groww now has ~₹3,500 Cr from the IPO to invest in brand building, MTF, NBFC, and tech. Combined with 26% market share and 83% organic acquisition, they can afford to not compete on price. Their DRHP revealed 77.7% 3-year retention &mdash; they're sticky. Competition just got a well-funded, already-dominant player.</div>
+<div class="section-body"><div class="section-body-inner">
+<p class="section-desc">Major regulatory, market, and competitive developments shaping Indian broking in 2025–26. Know these for strategy discussions.</p>
+<div class="trends-grid">
+
+<div class="trend-card">
+<h4>🔴 SEBI Stock Broker Regulations 2026 Overhaul</h4>
+<div class="trend-date">January 2026 — First overhaul in 30 years</div>
+<p>SEBI announced the first comprehensive rewrite of Stock Broker Regulations since inception. Key changes: stricter client fund segregation, enhanced cybersecurity mandates, "qualified client" classifications, algo trading framework integration, and tighter reporting requirements. This is a watershed moment — compliance costs rise, but barriers to entry rise faster. Consolidation toward top 5–7 brokers expected.</p>
 </div>
-<div class="card"><h3>Why is Dhan growing faster than Zerodha despite being 10 years younger?</h3>
-<div class="answer">Dhan entered with a clean slate &mdash; no legacy systems, aggressive pricing (12.49% MTF, ₹0 delivery, ₹0 lifetime AMC), modern tech (free TradingView, Fuzz AI, copy trading). Zerodha is managing a declining base because they haven't innovated on acquisition. Dhan is eating Zerodha's lunch on pricing and tech maturity.</div>
+
+<div class="trend-card">
+<h4>🟡 SEBI Algo Trading Framework — Mandatory from April 2026</h4>
+<div class="trend-date">April 1, 2026 — Go-live date</div>
+<p>All algorithmic orders must be tagged, registered with exchanges, and subject to regulatory oversight. APIs must be approved. Algo developers need exchange registration. This legitimizes retail algo trading while adding friction. Brokers with existing API infrastructure (Zerodha Kite Connect, Dhan DhanHQ) have first-mover advantage. Others must build or partner.</p>
 </div>
-<div class="card"><h3>Will a partner/referral channel work for Zerodha?</h3>
-<div class="answer">Yes, if positioned correctly. Zerodha's brand trust means partners would accept lower payouts for the association. The challenge: Zerodha's culture has always been product-led, not sales-led. Building a partner channel would require organizational change. But if they do it right, they could capture the mid-tier influencer market that Angel One currently owns.</div>
+
+<div class="trend-card">
+<h4>🟢 GIFT City &amp; US Stocks — Top 4 Approved</h4>
+<div class="trend-date">2025–2026 — Phased approvals</div>
+<p>The top 4 Indian brokers have received IFSCA approval to offer US stocks via GIFT City's IFSC. This enables Indian retail investors to trade US stocks (Apple, Tesla, NVIDIA, etc.) without LRS complications. Expected to unlock a $500M+ annual revenue opportunity by 2028. Brokers without GIFT City approval risk losing premium clients.</p>
 </div>
-<div class="card"><h3>Which product feature would have the biggest impact on reducing churn?</h3>
-<div class="answer">A personalized portfolio tracker with goal-based investing. The #1 reason users churn is they don't see their money growing and lose interest. If you show them a goal (retirement, education, vacation) with a progress bar and automated SIP suggestions, they stay invested. Robinhood proved this &mdash; users with goals have 3x higher retention.</div>
+
+<div class="trend-card">
+<h4>🔴 F&O Contraction — The New Normal</h4>
+<div class="trend-date">June 2024 – June 2026 (ongoing)</div>
+<p>Industry F&O notional ADTO contracted ~38%. Individual investor F&O participation down 36%. Higher lot sizes, restricted weekly expiries, and mandatory risk disclosures have structurally reduced retail F&O participation. This is not cyclical — it's a permanent regulatory shift. Brokers must diversify revenue or face margin compression.</p>
 </div>
-<div class="card"><h3>What would you do differently if you were leading growth at Upstox today?</h3>
-<div class="answer">Upstox has brand recognition (Ratan Tata) but hasn't converted it to acquisition leadership. I'd launch a referral program (₹200/referred + brokerage share), reactivate their dormant user base (estimated 2-3M inactive accounts), and double down on MTF with competitive pricing. Their current MTF rate of ~18.25% is the highest in the market &mdash; bringing it to 14% would unlock significant volume.</div>
+
+<div class="trend-card">
+<h4>🟡 AI in Broking — Dhan's Fuzz AI Sets the Pace</h4>
+<div class="trend-date">2025–2026 — Emerging</div>
+<p>Dhan's Fuzz AI (agentic AI for finance) is the first-mover. Natural language portfolio queries, trade explanations, market summaries, and personalized insights. Competitors are scrambling — expect 2–3 more AI assistant launches by end-2026. The quality of AI execution (accuracy, personalization, trust) will become a brand differentiator, not just a feature checkbox.</p>
 </div>
+
+<div class="trend-card">
+<h4>🟢 Dhan Unicorn — $1.2B at 46.5% PAT Margin</h4>
+<div class="trend-date">October 2025 — Series B</div>
+<p>Dhan achieved unicorn status ($1.2B valuation, $120M Series B) with FY25 PAT of ₹408 Cr at 46.5% margin — highest among all discount brokers. Revenue ₹877 Cr. Fastest-growing discount broker in net client additions (3rd overall). Proves that a lean, tech-first broker can be both hyper-growth and highly profitable.</p>
 </div>
-<a href="#" class="btn-up" title="Back to top">&uarr;</a>
+
+<div class="trend-card">
+<h4>🟡 Market Share Shifts — Groww 28.2%, Zerodha 15.4%, Angel One 14.8%</h4>
+<div class="trend-date">January 2026 — NSE Active Client Data</div>
+<p>Groww extended its lead to 28.2% (from 26.3% in Mar 25). Zerodha declined to 15.4% (from ~15%). Angel One slipped to 14.8% (from ~15–16%). The gap between #1 and #2 is now nearly 2x. The "Big 3" concentration continues — top 3 control 58.4% of active clients. Dhan is the only meaningful challenger from outside the top 3.</p>
+</div>
+
+</div>
+</div></div></section>
+
+<!-- ═══════════════════════ 8. KEY INDUSTRY NUMBERS ═══════════════════════ -->
+<section id="numbers">
+<div class="section-header" data-section="numbers">
+<span class="section-num">Sec 8</span>
+<h2>Key Industry Numbers — At Your Fingertips</h2>
+<span class="accordion-icon">+</span>
+</div>
+<div class="section-body"><div class="section-body-inner">
+<p class="section-desc">Memorize these numbers. They anchor every strategy conversation and signal deep industry knowledge.</p>
+
+<div class="card" id="card-key-numbers">
+<div class="card-header open" data-card="key-numbers"><h3>Market Size &amp; Penetration</h3><span class="card-icon">+</span></div>
+<div class="card-body open"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">128M</div><div class="lbl">Registered PANs with Demat</div></div>
+<div class="metric-card"><div class="val">194M</div><div class="lbl">Total Demat Accounts</div></div>
+<div class="metric-card"><div class="val">66M</div><div class="lbl">Truly Active Investors</div><div class="sub">Jan 2026 (vs 128M registered)</div></div>
+<div class="metric-card"><div class="val">~48M</div><div class="lbl">NSE Active Clients</div><div class="sub">Jan 2026</div></div>
+<div class="metric-card"><div class="val">5%</div><div class="lbl">Active Broking Penetration</div><div class="sub">India (vs 62% US)</div></div>
+<div class="metric-card"><div class="val">16–18%</div><div class="lbl">Indian Adults with Demat</div></div>
+</div></div></div></div>
+
+<div class="card" id="card-num-revenue">
+<div class="card-header" data-card="num-revenue"><h3>Revenue &amp; Profitability (FY25)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">₹5,238 Cr</div><div class="lbl">Angel One Revenue</div></div>
+<div class="metric-card"><div class="val">₹3,901 Cr</div><div class="lbl">Groww Revenue</div></div>
+<div class="metric-card"><div class="val">₹8,339 Cr</div><div class="lbl">Motilal Oswal Revenue</div></div>
+<div class="metric-card"><div class="val">44.92%</div><div class="lbl">Groww PAT Margin</div></div>
+<div class="metric-card"><div class="val">46.5%</div><div class="lbl">Dhan PAT Margin</div><div class="sub">Highest discount broker</div></div>
+<div class="metric-card"><div class="val">85.38%</div><div class="lbl">Groww Contribution Margin</div></div>
+</div></div></div></div>
+
+<div class="card" id="card-num-market">
+<div class="card-header" data-card="num-market"><h3>Market Share (Jan 2026, NSE Active Clients)</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">28.2%</div><div class="lbl">Groww</div><div class="sub">#1, 13.5M+ clients</div></div>
+<div class="metric-card"><div class="val">15.4%</div><div class="lbl">Zerodha</div><div class="sub">#2, declining</div></div>
+<div class="metric-card"><div class="val">14.8%</div><div class="lbl">Angel One</div><div class="sub">#3, 7.1M+ clients</div></div>
+<div class="metric-card"><div class="val">~10%</div><div class="lbl">Upstox</div><div class="sub">#4</div></div>
+<div class="metric-card"><div class="val">~2.2%</div><div class="lbl">Dhan</div><div class="sub">#5, fastest growing</div></div>
+<div class="metric-card"><div class="val">58.4%</div><div class="lbl">Top 3 Concentration</div></div>
+</div></div></div></div>
+
+<div class="card" id="card-num-trading">
+<div class="card-header" data-card="num-trading"><h3>Trading &amp; MTF</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">₹84,659 Cr</div><div class="lbl">Industry MTF Book</div><div class="sub">Jun 2025</div></div>
+<div class="metric-card"><div class="val">₹1,036 Cr</div><div class="lbl">Groww MTF Book</div><div class="sub">1.22% share</div></div>
+<div class="metric-card"><div class="val">−38%</div><div class="lbl">F&O ADTO Contraction</div><div class="sub">Jun 24–Jun 25</div></div>
+<div class="metric-card"><div class="val">−36%</div><div class="lbl">Individual F&O Participation</div></div>
+<div class="metric-card"><div class="val">₹193T</div><div class="lbl">Individual Turnover</div><div class="sub">FY25 (₹70T in FY20)</div></div>
+<div class="metric-card"><div class="val">76–78%</div><div class="lbl">Digital-First Client Share</div></div>
+</div></div></div></div>
+
+<div class="card" id="card-num-growth">
+<div class="card-header" data-card="num-growth"><h3>Growth &amp; Projections</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">₹1.1T→₹2.6T</div><div class="lbl">I&WM TAM Growth</div><div class="sub">2025→2030</div></div>
+<div class="metric-card"><div class="val">~60%</div><div class="lbl">Digital-First Rev CAGR</div></div>
+<div class="metric-card"><div class="val">41.7%</div><div class="lbl">Groww Client CAGR</div><div class="sub">Jun 22–Jun 25</div></div>
+<div class="metric-card"><div class="val">7.98%</div><div class="lbl">Industry Client CAGR</div></div>
+<div class="metric-card"><div class="val">83%</div><div class="lbl">Groww Organic Acq.</div></div>
+<div class="metric-card"><div class="val">77.7%</div><div class="lbl">Groww 3yr Retention</div></div>
+</div></div></div></div>
+
+<div class="card" id="card-num-angel">
+<div class="card-header" data-card="num-angel"><h3>Angel One Key Metrics</h3><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<div class="metric-grid">
+<div class="metric-card"><div class="val">₹423 → ₹202</div><div class="lbl">CPA Reduction</div><div class="sub">May→Nov 2025 (52%↓)</div></div>
+<div class="metric-card"><div class="val">&lt;1% → 7%</div><div class="lbl">Activation Rate</div><div class="sub">Sep→Dec 2025</div></div>
+<div class="metric-card"><div class="val">2,858</div><div class="lbl">Active DRAs</div><div class="sub">Dec 2025</div></div>
+<div class="metric-card"><div class="val">29+</div><div class="lbl">Years of Operations</div></div>
+<div class="metric-card"><div class="val">22.34%</div><div class="lbl">PAT Margin (FY25)</div></div>
+<div class="metric-card"><div class="val">14.99%</div><div class="lbl">MTF Interest Rate</div></div>
+</div></div></div></div>
+
+<div class="insight-box" style="margin-top:16px"><strong>Pro tip:</strong> In strategy interviews, quoting specific numbers (not ranges) signals deep preparation. Drop "66M truly active investors" or "Groww 85.38% contribution margin" and watch the interviewer lean in. But don't overdo it — use numbers to support arguments, not as a trivia contest.</div>
+
+</div></div></section>
+
+</div><!-- /.container -->
+
+<a href="#" class="btn-up" id="btnUp" title="Back to top">↑</a>
 <footer>
-<p>Prepared for Anurag Shukla &middot; Strategy Interview Prep &middot; Indian Stockbroking &amp; Financial Services &middot; June 2026</p>
+<p>Prepared for Anurag Shukla · Strategy Interview Prep · Indian Stockbroking &amp; Financial Services · June 2026</p>
+<p style="font-size:.78rem;margin-top:4px;opacity:.7">Sources: Company filings, DRHP, NSE/BSE data, SEBI circulars, pricing pages, news reports</p>
 </footer>
+
+</main>
+
 <script>
-document.querySelectorAll('section[id]').forEach(function(sec) {
-  new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if(e.isIntersecting) {
-        document.querySelectorAll('.nav-links a').forEach(function(a) {
-          a.style.color = a.getAttribute('href') === '#' + sec.id ? '#1a56db' : '#555';
-        });
-      }
-    });
-  }, {rootMargin: '-50% 0px -50% 0px'}).observe(sec);
+// ── ACCORDION: Section headers ──
+document.querySelectorAll('.section-header').forEach(function(hdr) {
+  hdr.addEventListener('click', function() {
+    var section = this.parentElement;
+    var body = section.querySelector('.section-body');
+    var isOpen = this.classList.contains('open');
+    if (isOpen) {
+      this.classList.remove('open');
+      body.classList.remove('open');
+    } else {
+      this.classList.add('open');
+      body.classList.add('open');
+    }
+    // After transition, scroll to header if opening
+    if (!isOpen) {
+      setTimeout(function() { hdr.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+    }
+  });
+});
+
+// ── ACCORDION: Card headers ──
+document.querySelectorAll('.card-header').forEach(function(hdr) {
+  hdr.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var card = this.parentElement;
+    var body = card.querySelector('.card-body');
+    var isOpen = this.classList.contains('open');
+    if (isOpen) {
+      this.classList.remove('open');
+      body.classList.remove('open');
+    } else {
+      this.classList.add('open');
+      body.classList.add('open');
+    }
+  });
+});
+
+// ── EXPAND / COLLAPSE ALL ──
+var btnExpand = document.getElementById('btnExpandAll');
+var btnCollapse = document.getElementById('btnCollapseAll');
+
+btnExpand.addEventListener('click', function() {
+  document.querySelectorAll('.section-header').forEach(function(h) { h.classList.add('open'); });
+  document.querySelectorAll('.section-body').forEach(function(b) { b.classList.add('open'); });
+  document.querySelectorAll('.card-header').forEach(function(h) { h.classList.add('open'); });
+  document.querySelectorAll('.card-body').forEach(function(b) { b.classList.add('open'); });
+  btnExpand.style.display = 'none';
+  btnCollapse.style.display = '';
+});
+
+btnCollapse.addEventListener('click', function() {
+  document.querySelectorAll('.section-header').forEach(function(h) { h.classList.remove('open'); });
+  document.querySelectorAll('.section-body').forEach(function(b) { b.classList.remove('open'); });
+  document.querySelectorAll('.card-header').forEach(function(h) { h.classList.remove('open'); });
+  document.querySelectorAll('.card-body').forEach(function(b) { b.classList.remove('open'); });
+  btnCollapse.style.display = 'none';
+  btnExpand.style.display = '';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// ── SIDEBAR: Mobile toggle ──
+var navToggle = document.getElementById('navToggle');
+var sidebar = document.getElementById('sidebar');
+var overlay = document.getElementById('sidebarOverlay');
+
+navToggle.addEventListener('click', function() {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+
+overlay.addEventListener('click', function() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+// Close sidebar when a link is clicked (mobile)
+document.querySelectorAll('.sidebar a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+});
+
+// ── SIDEBAR: Highlight active section on scroll ──
+var sidebarLinks = document.querySelectorAll('.sidebar a');
+var sections = [];
+sidebarLinks.forEach(function(link) {
+  var id = link.getAttribute('data-section');
+  if (id) {
+    var sec = document.getElementById(id);
+    if (sec) sections.push({id:id, el:sec, link:link});
+  }
+});
+
+function updateSidebar() {
+  var scrollY = window.scrollY + 150;
+  var activeId = null;
+  sections.forEach(function(s) {
+    if (s.el.offsetTop <= scrollY) activeId = s.id;
+  });
+  sidebarLinks.forEach(function(l) {
+    l.classList.remove('active');
+    if (l.getAttribute('data-section') === activeId) l.classList.add('active');
+  });
+}
+
+window.addEventListener('scroll', updateSidebar, {passive:true});
+updateSidebar();
+
+// ── BACK TO TOP ──
+var btnUp = document.getElementById('btnUp');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 600) btnUp.classList.add('visible');
+  else btnUp.classList.remove('visible');
+}, {passive:true});
+
+btnUp.addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// ── KEYBOARD: Ctrl+Shift+E = Expand All, Ctrl+Shift+C = Collapse All ──
+document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+    e.preventDefault();
+    btnExpand.click();
+  }
+  if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+    e.preventDefault();
+    btnCollapse.click();
+  }
 });
 </script>
+
 </body></html>
