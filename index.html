@@ -1366,6 +1366,26 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <li>Upgraded to ₹300 fixed + 35% brokerage; RMs calling to reactivate (~23 DRAs)</li>
 </ul>
 
+<h4>7. L2 DRA Referral KYC — Offer Arbitrage Correction (Jul 2026)</h4>
+<ul>
+<li>Identified 5,000-7,000 KYCs/month in referral channel where the referrer originally came from the DRA channel</li>
+<li>Referral channel pays ₹400+ CPA to these referrers vs ₹95 CPA to DRA — creates ₹300+ arbitrage gap incentivizing DRA-to-referral migration</li>
+<li>Problem: Direct cannibalization of DRA channel + inflated blended CPA for the same client</li>
+<li>Solution: Reduce L2 DRA referrer offers from ₹400+ → ≤₹200 CPA to close the arbitrage gap</li>
+<li>Analysis underway: Identifying all DRA-origin referrers, current offers, current FYR, and modeling CTR impact of offer reduction</li>
+<li>Expected impact: KYCs flow back to DRA channel at correct economics; DRA CTR improves</li>
+</ul>
+
+<h4>8. Legacy Dormant Client Remapping to DRAs (Jul 2026)</h4>
+<ul>
+<li>~83,000 dormant clients across 582 distinct DRAs — clients went dormant when brokerage sharing was paused and DRAs directed them off-platform</li>
+<li>DRAs are explicitly requesting remapping of old clients; willing to reactivate client trading if brokerage sharing resumes</li>
+<li>Focus on High and Medium rated DRAs for highest reactivation probability</li>
+<li>Mechanics: Remap dormant clients → reinstate brokerage sharing → DRA reactivates client → trading resumes → FYR recovers</li>
+<li>Side benefit: Inactive DRAs may restart KYC acquisition once they see old clients generating brokerage income</li>
+<li>Analysis underway: Pre-Aug 2024 KYC baseline vs current activity levels across rating tiers</li>
+</ul>
+
 </div></div></div>
 
 <!-- B: Operations & Partner Management -->
@@ -1405,6 +1425,16 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <ul>
 <li>Identified gap: DRAs being terminated before pending KYC payouts processed → revenue loss and partner dissatisfaction</li>
 <li>Working with Yogesh Solat (Hemanth's team) to ensure payout processing completes before deactivation</li>
+</ul>
+
+<h4>6. SPOT Offers — Inactive DRA Reactivation Campaign (Jul 2026)</h4>
+<ul>
+<li>~2,700 DRAs inactive for >1 month (zero KYCs), on base offers ≤₹200 — not enough to restart acquisition</li>
+<li>Campaign: ₹300-400 CPA on first 10-15 KYCs, 5-7 day window (Jul 13-19, 2026)</li>
+<li>Scarcity + urgency mechanics: time-limited higher offer drives reactivation behavior</li>
+<li>Modeled impact: ~897-898 incremental KYCs at ₹308 blended CPA</li>
+<li>Approval workflow: Impact calculation → email Aishwarya by Jul 8-9 → written approval 3+ days before campaign</li>
+<li>Low risk design: Cap prevents abuse; if successful, reactivated DRAs continue at base rate post-campaign</li>
 </ul>
 
 </div></div></div>
@@ -1506,11 +1536,13 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <li>Achieved 100% adherence to internal data privacy policies. Eliminated risk of unauthorized DRA-to-client contact</li>
 </ul>
 
-<h4>2. FDS Process Redesign — Operations Buffer Model</h4>
+<h4>2. FDS Process Redesign — Operations Buffer Model (Implemented Jul 2026)</h4>
 <ul>
 <li>Identified 7 critical process gaps in FDS (Fraud Detection &amp; Surveillance) workflow that were causing wrongful DRA terminations</li>
 <li>Gaps included: no case closure confirmation, generic warning emails, offense counter never resetting, no business evaluation before termination, CXO overused as ad-hoc mediator</li>
 <li>Designed new SOP: Operations Team as communication buffer between FDS and DRAs. Structured escalation criteria — only high-value contested cases reach CXO</li>
+<li>Live implementation: All FDS ↔ DRA communications now routed through Ops team (Jignesh / Abbas) as single communication funnel</li>
+<li>Flow: FDS → Ops → DRA → Ops → FDS → Ops confirms closure to DRA. Full audit trail, zero missed responses</li>
 <li>Created complete documentation: FDS Process Gaps Summary, Operations SOP, 6 standardized email templates, 5-phase implementation action plan</li>
 <li>Expected impact: ~70% reduction in CXO involvement, fair process for DRAs, compliance + business objectives reconciled</li>
 </ul>
@@ -1639,7 +1671,7 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <span class="accordion-icon">+</span>
 </div>
 <div class="section-body"><div class="section-body-inner">
-<p class="section-desc">Ideas generated through structured brainstorming for Angel One's acquisition channels. Shortlisted ideas are being actively evaluated for implementation. New ideas generated daily via automated cron pipeline. <em>Last updated: June 2026.</em></p>
+<p class="section-desc">Ideas generated through structured brainstorming for Angel One's acquisition channels. Shortlisted ideas are being actively evaluated for implementation. New ideas generated daily via automated cron pipeline. <em>Last updated: July 2026.</em></p>
 
 <!-- Shortlisted Ideas -->
 <div class="card" id="card-shortlisted">
@@ -1670,6 +1702,24 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <p><strong>Next Step:</strong> Analytics verification — build the scoring model in Databricks SQL using tb_kyc + SN_clientwisefyr + SN_clientkyc data.</p>
 </div></div></div>
 
+<div class="card" style="border:2px solid var(--accent);margin-bottom:14px">
+<div class="card-header" data-card="sl002"><h4>SL-002: "Profit-Moment Referral Trigger" — Behavioral Timing for Referral Conversion</h4><span class="tag tag-blue" style="font-size:.75rem">🔍 Under Review</span><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Type:</strong> Product Feature + Behavioral Analytics</p>
+<p><strong>Source:</strong> Batch 3 (2026-07-03)</p>
+<p><strong>Core Insight:</strong> The best time to ask for a referral is when the user experiences a positive outcome. A trader who just booked a ₹1,000+ profit is in a dopamine-driven high-trust state — their likelihood of sharing the platform authentically is orders of magnitude higher than a cold in-app banner. No Indian broker triggers referrals based on trading outcomes.</p>
+<p><strong>The Idea:</strong> Embed an event-driven referral nudge that fires immediately after a client closes a position with profit above a configurable threshold (₹500 equity delivery, ₹200 F&O). The nudge is a non-intrusive bottom sheet: <em>"You just made ₹1,243 on RELIANCE. Know someone who'd want to start? Refer them — you both earn."</em> One-tap share via WhatsApp/Telegram with a pre-filled social-proof message: <em>"I just made ₹X trading on Angel One. Here's my link if you want to try."</em> Max once/week to avoid fatigue.</p>
+<p><strong>Analytics Thesis:</strong></p>
+<ol>
+<li>Identify profit-closing events above thresholds — volume and unique clients per month</li>
+<li>Segment profit-event clients by trade frequency quartile — do occasional traders with big wins refer more than frequent traders?</li>
+<li>A/B test: profit-moment trigger vs standard in-app banner. Measure referral sends, KYC conversion rate, and referred-client 30-day FYR</li>
+<li>Model optimal profit threshold balancing nudge volume with signal quality</li>
+</ol>
+<p><strong>Why Angel One Specifically:</strong> Angel One's 7.58M clients generate massive profit-event surface area. No Indian broker triggers referrals on trading outcomes. Zerodha won't (minimalist philosophy), Groww can't (MF-first, fewer discrete profit events). This turns a product gap (no social features) into a behavioral advantage using data already available in trade tables.</p>
+<p><strong>Next Step:</strong> Quantify profit-event volume from trade data (Databricks SQL); model nudge frequency at various profit thresholds; design A/B test framework with referral-send and FYR metrics.</p>
+</div></div></div>
+
 </div></div></div>
 
 <!-- Idea Pipeline -->
@@ -1681,6 +1731,10 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <tr><td>1</td><td><strong>Clients Already on Angel One</strong> — Reactivation-as-Acquisition (CRED-style nudge for dormant clients)</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
 <tr><td>2</td><td><strong>Brokerage-Linked Referral Rewards</strong> — 15% of friend's first-month brokerage replacing flat ₹120</td><td><span class="tag tag-amber">Strategy</span></td><td>For review</td></tr>
 <tr style="background:#f0f4ff"><td>3</td><td><strong>DRA Quality Score</strong> — Public reputation signal on DRA landing pages</td><td><span class="tag tag-green">Analytics</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
+<tr><td>4</td><td><strong>Pre-KYC "Paper Trade First" Funnel</strong> — Engagement before acquisition via simulated trading</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
+<tr><td>5</td><td><strong>"First-Trade Basket"</strong> — One-tap activation for KYC'd non-traders with curated ₹500 starter</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
+<tr style="background:#f0f4ff"><td>6</td><td><strong>Profit-Moment Referral Trigger</strong> — Behavioral timing for referral conversion post-profit trade</td><td><span class="tag tag-blue">Product Feature</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
+<tr><td>7</td><td><strong>DRA Client Activation Bonus</strong> — Split payout: KYC completion + first-trade activation bonus</td><td><span class="tag tag-amber">Strategy</span></td><td>For review</td></tr>
 </tbody></table></div>
 <div class="insight-box"><strong>Process:</strong> 2 new ideas generated daily via automated pipeline (DeepSeek V4 Pro, 8 AM IST). Anurag reviews and shortlists promising ideas. Shortlisted ideas move to active evaluation with analytics verification plan.</div>
 </div></div></div>
