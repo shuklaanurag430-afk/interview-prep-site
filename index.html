@@ -1720,6 +1720,42 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <p><strong>Next Step:</strong> Quantify profit-event volume from trade data (Databricks SQL); model nudge frequency at various profit thresholds; design A/B test framework with referral-send and FYR metrics.</p>
 </div></div></div>
 
+<!-- SL-003 -->
+<div class="card-header" data-card="sl003"><h4>SL-003: Graph ML Fraud Scoring — Beyond SQL Rules with Structural Metrics</h4><span class="tag tag-blue" style="font-size:.75rem">🔍 Under Review</span><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Type:</strong> Analytics + Fraud Detection</p>
+<p><strong>Source:</strong> Batch 6 (2026-07-06)</p>
+<p><strong>Core Insight:</strong> The existing graph fraud detection plan (SQL-based rules) catches obvious rings but misses evolving patterns. Graph ML metrics — degree centrality, clustering coefficient, graph embeddings (Node2Vec) — can be computed on SQL data without Neo4j migration, catching fraud patterns that rule-based systems miss.</p>
+<p><strong>The Idea:</strong> Layer three graph metrics as risk multipliers: (1) Degree Centrality — continuous risk score based on how many unique PANs connect through each device/IP; (2) Clustering Coefficient — identifies tight circular referral loops (A→B→C→A) that signal fraud rings; (3) Graph Embeddings (Node2Vec) — converts each user's network shape into a vector, trains Random Forest on known fraud cases to flag users whose network structure resembles fraudsters even without breaking explicit SQL rules.</p>
+<p><strong>Analytics Thesis:</strong></p>
+<ol>
+<li>Build graph representation from tb_kyc (referral chains), device IDs, IPs, bank accounts — compute degree centrality and clustering coefficient</li>
+<li>Train Random Forest on labeled fraud cases (FDS data) using graph embeddings + traditional features</li>
+<li>Run 3-month parallel test: SQL rules vs graph ML — compare unique fraud flags, false positive rate</li>
+<li>If graph ML outperforms, propose combined scoring: SQL 40% + graph ML 60%</li>
+</ol>
+<p><strong>Why Angel One Specifically:</strong> Graph fraud master plan already exists. No Neo4j needed — just computed columns + scikit-learn. No Indian broker applying graph ML to fraud. SEBI scrutiny on KYC quality is increasing — ML-driven fraud detection is both regulatory and cost advantage.</p>
+<p><strong>Next Step:</strong> Compute degree centrality and clustering coefficient on existing data; pull labeled fraud cases from FDS; build Random Forest prototype; compare against SQL rule outputs.</p>
+</div></div></div>
+
+<!-- SL-004 -->
+<div class="card-header" data-card="sl004"><h4>SL-004: Referral Propensity Scoring — Target the Right Users, Not All Users</h4><span class="tag tag-blue" style="font-size:.75rem">🔍 Under Review</span><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Type:</strong> Analytics + Personalization</p>
+<p><strong>Source:</strong> Batch 6 (2026-07-06)</p>
+<p><strong>Core Insight:</strong> Angel One's current referral program broadcasts to all 7.58M clients — most will never refer. Sending referral CTAs to near-zero-probability users burns engagement budget. A propensity model narrows target to top 20% most likely to refer, improving conversion-per-impression while reducing fatigue.</p>
+<p><strong>The Idea:</strong> Build XGBoost propensity model scoring each client on referral probability in next 30 days. Features: RFM-NPS framework (Recency since last trade/login/deposit; Frequency of trades/sessions/products; Monetary metrics; NPS/engagement including feature adoption, referral history). Action: push notifications only to top 20% propensity tier; passive entry for middle 30%; suppress CTAs for bottom 50%.</p>
+<p><strong>Analytics Thesis:</strong></p>
+<ol>
+<li>Identify referrers from tb_kyc (client referrals, not DRA). Build positive/negative class training dataset</li>
+<li>Engineer RFM-NPS features, train XGBoost baseline. Evaluate AUC-ROC, precision at top 20%</li>
+<li>A/B test: propensity-gated vs uniform referral. Track referral sends per 1K impressions, KYC conversion, uninstall rate</li>
+<li>Compare referred-client 90-day FYR — do high-propensity referrers attract higher-quality clients?</li>
+</ol>
+<p><strong>Why Angel One Specifically:</strong> Low-risk — no product build, just model + targeting logic. 7.58M user base provides statistical power. No competitor does propensity-gated referrals. Reducing irrelevant notifications by 40% increases engagement with the remaining ones by 25%. One data scientist, 2-3 weeks.</p>
+<p><strong>Next Step:</strong> Pull referral source data from tb_kyc; build RFM features from trade/login data; train baseline XGBoost; compute lift at top 20%.</p>
+</div></div></div>
+
 </div></div></div>
 
 <!-- Idea Pipeline -->
@@ -1735,6 +1771,14 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <tr><td>5</td><td><strong>"First-Trade Basket"</strong> — One-tap activation for KYC'd non-traders with curated ₹500 starter</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
 <tr style="background:#f0f4ff"><td>6</td><td><strong>Profit-Moment Referral Trigger</strong> — Behavioral timing for referral conversion post-profit trade</td><td><span class="tag tag-blue">Product Feature</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
 <tr><td>7</td><td><strong>DRA Client Activation Bonus</strong> — Split payout: KYC completion + first-trade activation bonus</td><td><span class="tag tag-amber">Strategy</span></td><td>For review</td></tr>
+<tr><td>8</td><td><strong>Corporate Salary Bridge</strong> — Employer-benefits acquisition channel via corporate partnerships</td><td><span class="tag tag-amber">Strategy</span></td><td>For review</td></tr>
+<tr><td>9</td><td><strong>Invest Together</strong> — Social co-investing as acquisition flywheel (shared watchlist, copy trade)</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
+<tr><td>10</td><td><strong>IPO Gateway</strong> — Product-led acquisition through primary market entry (IPO as front door)</td><td><span class="tag tag-blue">Product Feature</span></td><td>For review</td></tr>
+<tr><td>11</td><td><strong>DRA Community Anchor</strong> — Regional-language micro-communities as acquisition engines</td><td><span class="tag tag-amber">Strategy</span></td><td>For review</td></tr>
+<tr style="background:#f0f4ff"><td>12</td><td><strong>Graph ML Fraud Scoring</strong> — Degree centrality + clustering + Node2Vec embeddings on SQL data</td><td><span class="tag tag-green">Analytics</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
+<tr style="background:#f0f4ff"><td>13</td><td><strong>Referral Propensity Scoring</strong> — XGBoost targeting top 20% referrers, reducing notification fatigue</td><td><span class="tag tag-green">Analytics</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
+<tr><td>14</td><td><strong>Churn-Integrated Referral Triggers</strong> — Suppress referral CTAs for at-risk, prompt when engaged</td><td><span class="tag tag-blue">Product Strategy</span></td><td>For review</td></tr>
+<tr><td>15</td><td><strong>RL for Dynamic Referral Rewards</strong> — Contextual bandit finding floor price per micro-segment</td><td><span class="tag tag-green">Advanced Analytics</span></td><td>For review</td></tr>
 </tbody></table></div>
 <div class="insight-box"><strong>Process:</strong> 2 new ideas generated daily via automated pipeline (DeepSeek V4 Pro, 8 AM IST). Anurag reviews and shortlists promising ideas. Shortlisted ideas move to active evaluation with analytics verification plan.</div>
 </div></div></div>
