@@ -1756,6 +1756,24 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <p><strong>Next Step:</strong> Pull referral source data from tb_kyc; build RFM features from trade/login data; train baseline XGBoost; compute lift at top 20%.</p>
 </div></div></div>
 
+<!-- SL-005 -->
+<div class="card-header" data-card="sl005"><h4>SL-005: Graph Fraud Detection Master Plan — Relationship-Based Fraud Detection</h4><span class="tag tag-blue" style="font-size:.75rem">🔍 Under Review</span><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Type:</strong> Strategy + Fraud Detection + Product UX</p>
+<p><strong>Source:</strong> Batch 7 (2026-07-06), Idea 16 · Original doc: <code>ideas/graph_fraud_master_plan.md</code></p>
+<p><strong>Core Insight:</strong> Current fraud defense relies on blunt rules (hard caps per PAN, geographic blacklists) that punish good users while missing organized rings that cycle through multiple PANs. Fraudsters share infrastructure — devices, IPs, bank accounts — because acquiring new ones for every fake referral is expensive. Mapping these relationships as a graph reveals organized rings as dense clusters.</p>
+<p><strong>The Idea:</strong> Two-phase graph fraud detection system. <strong>Phase 1 (SQL, immediate):</strong> Three SQL rules — Device Farm Check (>5 accounts/device/90d), Bank Account Carousel (>5 accounts/bank account), IP Velocity (>10 KYCs from same referrer+IP/48h). Rolling 90-day forgiveness window with backtested threshold from bimodal distribution. <strong>4-Status UX Funnel:</strong> Pending KYC → Under Verification → Verified & Rewarded → Rejected — users only see Verified rewards, eliminating payout-expectation complaints. <strong>Phase 2 (long-term):</strong> Neo4j/Neptune for millisecond deep-tier multi-hop queries.</p>
+<p><strong>Analytics Thesis:</strong></p>
+<ol>
+<li>Backtest SQL rules against 12 months of historical data — plot flag distribution, confirm bimodal pattern, set threshold in valley</li>
+<li>Compute false positive rate at candidate thresholds (5, 8, 10, 15 flags) — optimize for max detection at acceptable FPR</li>
+<li>Run 3-month shadow mode — compare graph flags vs FDS-identified fraud, measure unique detection</li>
+<li>Model cost savings: fraudulent KYCs/month × (CPA + processing + FDS case cost) vs implementation cost</li>
+</ol>
+<p><strong>Why Angel One Specifically:</strong> Phase 1 requires zero new infrastructure — pure SQL on existing tables (login_logs, funding_transactions, referrals). No Indian broker uses relationship-based fraud detection. SEBI scrutiny on KYC quality is increasing — proactive fraud detection is a regulatory moat. The 4-status UX funnel turns backend rejection into a transparent user experience, improving trust while reducing FDS workload.</p>
+<p><strong>Next Step:</strong> Pull 12 months of referral + login + funding data; run backtest SQL rules; plot flag distribution; identify optimal threshold; present findings for shadow-mode approval.</p>
+</div></div></div>
+
 </div></div></div>
 
 <!-- Idea Pipeline -->
@@ -1779,6 +1797,7 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <tr style="background:#f0f4ff"><td>13</td><td><strong>Referral Propensity Scoring</strong> — XGBoost targeting top 20% referrers, reducing notification fatigue</td><td><span class="tag tag-green">Analytics</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
 <tr><td>14</td><td><strong>Churn-Integrated Referral Triggers</strong> — Suppress referral CTAs for at-risk, prompt when engaged</td><td><span class="tag tag-blue">Product Strategy</span></td><td>For review</td></tr>
 <tr><td>15</td><td><strong>RL for Dynamic Referral Rewards</strong> — Contextual bandit finding floor price per micro-segment</td><td><span class="tag tag-green">Advanced Analytics</span></td><td>For review</td></tr>
+<tr style="background:#f0f4ff"><td>16</td><td><strong>Graph Fraud Detection Master Plan</strong> — Relationship-based fraud detection with 4-status UX funnel</td><td><span class="tag tag-amber">Strategy</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
 </tbody></table></div>
 <div class="insight-box"><strong>Process:</strong> 2 new ideas generated daily via automated pipeline (DeepSeek V4 Pro, 8 AM IST). Anurag reviews and shortlists promising ideas. Shortlisted ideas move to active evaluation with analytics verification plan.</div>
 </div></div></div>
