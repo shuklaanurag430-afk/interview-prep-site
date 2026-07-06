@@ -1774,6 +1774,24 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <p><strong>Next Step:</strong> Pull 12 months of referral + login + funding data; run backtest SQL rules; plot flag distribution; identify optimal threshold; present findings for shadow-mode approval.</p>
 </div></div></div>
 
+<!-- SL-006 -->
+<div class="card-header" data-card="sl006"><h4>SL-006: "Friends With Pending KYC" — Lead-to-Referrer Mapping for KYC Completion</h4><span class="tag tag-blue" style="font-size:.75rem">🔍 Under Review</span><span class="card-icon">+</span></div>
+<div class="card-body"><div class="card-body-inner">
+<p><strong>Type:</strong> Product Feature + Conversion Optimization</p>
+<p><strong>Source:</strong> Batch 8 (2026-07-06), Idea 17</p>
+<p><strong>Core Insight:</strong> Angel One generates millions of leads (phone numbers in signup flow) that never complete KYC — sunk acquisition cost with zero return. These same people are in the phone contacts of existing Angel One clients. CRED proved the psychology: showing a user their friend is already on the platform drives conversion. Angel One can apply this to KYC completion — the referrer becomes a personalized conversion agent for an abandoned lead the company already paid to acquire.</p>
+<p><strong>The Idea:</strong> Build "Friends With Pending KYC" inside the referral page. Opt-in phone book sync → hashed phone matching against lead database (signups without UCC). Referrer sees: "3 of your contacts started their Angel One journey but didn't finish. A quick nudge could help them complete it — and you'll both earn." Shows name + abandonment stage. One-tap WhatsApp nudge with pre-filled message. Referrer earns ₹100 on KYC completion (lower than ₹120 fresh referral — lead already generated). Lead gets ₹50 first-trade credit. Privacy-first: hashed matching only, no contact storage.</p>
+<p><strong>Analytics Thesis:</strong></p>
+<ol>
+<li>Quantify abandoned lead pool — segment by stage (phone only, PAN started, KYC initiated, documents pending)</li>
+<li>Identify warm leads — referrers whose links were clicked but didn't convert. Highest-intent targets</li>
+<li>Pilot 10K opt-in referrers — contact match rate, nudge-send rate, nudge-to-KYC conversion, 7-day completion rate</li>
+<li>Model revenue recovery: pool size × match rate × nudge rate × conversion × avg FYR − rewards</li>
+</ol>
+<p><strong>Why Angel One Specifically:</strong> CRED validated the social proof nudge. Angel One has the lead volume (UAC, Meta, DRA, organic) for contact matching to be viable. ₹100 conversion reward is far cheaper than fresh CPA (₹200–400). Privacy-safe design. No Indian broker has this — Zerodha won't build contact-sync, Groww doesn't have the lead volume problem, Upstox doesn't have the referral infra.</p>
+<p><strong>Next Step:</strong> Pull abandoned lead funnel data; quantify pool size by stage; estimate contact-match overlap from existing referral data; model conversion at 5%, 10%, 15% nudge rates.</p>
+</div></div></div>
+
 </div></div></div>
 
 <!-- Idea Pipeline -->
@@ -1798,6 +1816,7 @@ Expected impact: 60% → 40% inactive (33% reduction in churn). Revenue impact: 
 <tr><td>14</td><td><strong>Churn-Integrated Referral Triggers</strong> — Suppress referral CTAs for at-risk, prompt when engaged</td><td><span class="tag tag-blue">Product Strategy</span></td><td>For review</td></tr>
 <tr><td>15</td><td><strong>RL for Dynamic Referral Rewards</strong> — Contextual bandit finding floor price per micro-segment</td><td><span class="tag tag-green">Advanced Analytics</span></td><td>For review</td></tr>
 <tr style="background:#f0f4ff"><td>16</td><td><strong>Graph Fraud Detection Master Plan</strong> — Relationship-based fraud detection with 4-status UX funnel</td><td><span class="tag tag-amber">Strategy</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
+<tr style="background:#f0f4ff"><td>17</td><td><strong>Friends With Pending KYC</strong> — Phone book sync → map abandoned leads to referrers for KYC completion</td><td><span class="tag tag-blue">Product Feature</span></td><td><span class="tag tag-green">🔍 Shortlisted</span></td></tr>
 </tbody></table></div>
 <div class="insight-box"><strong>Process:</strong> 2 new ideas generated daily via automated pipeline (DeepSeek V4 Pro, 8 AM IST). Anurag reviews and shortlists promising ideas. Shortlisted ideas move to active evaluation with analytics verification plan.</div>
 </div></div></div>
